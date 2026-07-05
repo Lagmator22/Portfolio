@@ -1,14 +1,13 @@
-# Portfolio — gurman s.
+# Portfolio: gurman s.
 
 Live at **https://lagmator22.github.io/Portfolio**
 
 A single-file, no-build portfolio: `index.html` carries the design system, the
 pixel-monster renderer, the cursor FX, and the React app (transpiled in the
-browser by Babel standalone). GitHub Pages serves the repo root as-is — there
-is no bundler, no server, no database.
+browser by Babel standalone). GitHub Pages serves the repo root as-is. There is no bundler, no server, no database.
 
 ```
-index.html              the whole site — tokens/CSS, monsters, cursor FX, React app
+index.html              the whole site, tokens/CSS, monsters, cursor FX, React app
 data/
   posts.json            published blog posts   (canonical; overrides inline fallback)
   projects.json         published projects
@@ -27,7 +26,7 @@ publish/
 
 ## How to publish a blog post (the dispatch)
 
-Everything happens in the browser on the live site — no laptop required.
+Everything happens in the browser on the live site, no laptop required.
 
 1. **One-time setup**
    - Open the site → footer → *owner sign-in* → enter the owner password.
@@ -54,7 +53,7 @@ echo -n "your-new-password" | shasum -a 256
 ```
 
 Paste the hex into `TWEAK_DEFAULTS.ownerHash` at the top of `index.html`,
-commit, push. Note the owner unlock is **UI gating only** — actual write
+commit, push. Note the owner unlock is **UI gating only**, actual write
 access always requires the PAT.
 
 ## Local development
@@ -73,7 +72,7 @@ stale cache.
 - CSP with explicit allowlists (`script-src` limited to self + SRI-pinned
   unpkg; `connect-src` limited to the four APIs the site actually calls).
 - React pinned with subresource integrity hashes.
-- Owner password never in source — only its SHA-256.
+- Owner password never in source, only its SHA-256.
 - The PAT lives only in the owner's browser (localStorage, optionally
   AES-GCM-encrypted with PBKDF2).
 - Markdown rendering escapes HTML before formatting; URLs are scheme-filtered.

@@ -6,17 +6,17 @@
 <meta name="theme-color" content="#0c0a18" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://avatars.githubusercontent.com; connect-src 'self' https://hn.algolia.com https://api.github.com https://formsubmit.co https://cloudflare-dns.com; base-uri 'self'; form-action 'self' https://formsubmit.co; object-src 'none'; frame-ancestors 'self'">
-<title>Gurman S. — AI & C++ Systems</title>
-<meta name="description" content="Portfolio and dispatch of Gurman S. — AI inference, edge computing, local AI, and pixel monsters." />
+<title>Gurman S. · AI & C++ Systems</title>
+<meta name="description" content="Portfolio and dispatch of Gurman S.: AI inference, edge computing, local-first software, and pixel monsters." />
 <link rel="canonical" href="https://lagmator22.github.io/Portfolio/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gurman S.">
-<meta property="og:title" content="Gurman S. — AI &amp; C++ Systems">
-<meta property="og:description" content="Portfolio and dispatch of Gurman S. — AI inference, edge computing, local AI, and pixel monsters.">
+<meta property="og:title" content="Gurman S. · AI &amp; C++ Systems">
+<meta property="og:description" content="Portfolio and dispatch of Gurman S.: AI inference, edge computing, local-first software, and pixel monsters.">
 <meta property="og:url" content="https://lagmator22.github.io/Portfolio/">
 <meta property="og:image" content="https://lagmator22.github.io/Portfolio/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gurman S. — AI &amp; C++ Systems">
+<meta name="twitter:title" content="Gurman S. · AI &amp; C++ Systems">
 <meta name="twitter:description" content="AI inference, edge computing, local AI, and pixel monsters.">
 <meta name="twitter:image" content="https://lagmator22.github.io/Portfolio/assets/og.png">
 
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="publish/console.css">
 
 <script>
-/* TWEAK_DEFAULTS — runtime config read by the React app and the cursor / theme
+/* TWEAK_DEFAULTS - runtime config read by the React app and the cursor / theme
  * scripts. Persists to localStorage under "gurman.tweaks.v2" once a user (or
  * owner) tweaks anything via the Tweaks panel; persisted values override these.
  *
@@ -56,32 +56,32 @@ const TWEAK_DEFAULTS = {
   "blogFont": "times",
   "motion": "full",
   "cursor": "crosshair",
-  "ownerHash": "0c1a27670aecc48ee49e582446a65d19a9122a849b4ce26f3160c8dc29f17724"
+  "ownerHash": "e7ec02421273f2f312020bda9294ec90f3433f904d3b40bb3640d9e1b63cdc9b"
 };
 window.TWEAK_DEFAULTS = TWEAK_DEFAULTS;
 </script>
 
 <style>
 /* ============================================================
- * DESIGN SYSTEM — TOKENS + COMPONENTS
+ * DESIGN SYSTEM - TOKENS + COMPONENTS
  * ============================================================
  * Organisation:
- *   1. TOKENS        — fonts, scales, OKLCH colors, motion
- *   2. BASE          — resets, body, noise overlay, focus
- *   3. NAV           — sticky nav + mobile drawer
- *   4. HERO          — title, monster arena
- *   5. BUTTONS/CHIPS — pills, primary/ghost/sm variants
- *   6. SECTIONS      — section header pattern + reveals
- *   7. PROJECTS      — grid cards + detail page
- *   8. BLOG          — post cards + reader typography
- *   9. CONTACT       — form + side rail
- *  10. CURSOR FX     — per-mode SHAPES (one rule each)
- *  11. MODAL/TWEAKS  — backdrop + tweaks panel
- *  12. FOOTER        — four-column with brand
- *  13. HERO REFINEMENTS — status, monster card
- *  16. ABOUT         — stack columns
- *  17. SCROLL UX     — progress bar, hint, section index
- *  18. ANIMATIONS    — reveals, stagger, glow halos
+ *   1. TOKENS        - fonts, scales, OKLCH colors, motion
+ *   2. BASE          - resets, body, noise overlay, focus
+ *   3. NAV           - sticky nav + mobile drawer
+ *   4. HERO          - title, monster arena
+ *   5. BUTTONS/CHIPS - pills, primary/ghost/sm variants
+ *   6. SECTIONS      - section header pattern + reveals
+ *   7. PROJECTS      - grid cards + detail page
+ *   8. BLOG          - post cards + reader typography
+ *   9. CONTACT       - form + side rail
+ *  10. CURSOR FX     - per-mode SHAPES (one rule each)
+ *  11. MODAL/TWEAKS  - backdrop + tweaks panel
+ *  12. FOOTER        - four-column with brand
+ *  13. HERO REFINEMENTS - status, monster card
+ *  16. ABOUT         - stack columns
+ *  17. SCROLL UX     - progress bar, hint, section index
+ *  18. ANIMATIONS    - reveals, stagger, glow halos
  *
  * COLOR SYSTEM
  * ------------
@@ -101,7 +101,7 @@ window.TWEAK_DEFAULTS = TWEAK_DEFAULTS;
  * -----
  * Adding new components? Put their rules in the matching
  * section above. Keep selectors flat (single-class) where
- * possible — easier to override + faster to grep.
+ * possible - easier to override + faster to grep.
  * ============================================================ */
 
 /* ================================================================
@@ -167,7 +167,7 @@ window.TWEAK_DEFAULTS = TWEAK_DEFAULTS;
   --accent-glow:oklch(0.48 0.18 var(--accent-h) / 0.40);
   color-scheme:light;
 }
-/* === VS-Code-style theme palettes — each forces its own bg/ink AND signature accent ===
+/* === VS-Code-style theme palettes - each forces its own bg/ink AND signature accent ===
    When the user picks one of these via Tweaks, JS also sets data-accent to a matching hue
    so the swatch grid lights up the right pip. The --accent-h overrides below are belt-and-
    suspenders: even if the user manually picks a different swatch, the theme keeps its vibe. */
@@ -275,7 +275,7 @@ img,canvas,svg{max-width:100%;display:block}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* AURORA — the moving-glass background. Three accent-tinted blobs blur
+/* AURORA - the moving-glass background. Three accent-tinted blobs blur
    into a slow drift; the layer parallaxes against the pointer (--mx/--my,
    lerped from JS) and recedes slightly as you scroll (--scroll-y). Hue
    keys off --accent-h so every theme/accent recolors it for free. */
@@ -451,7 +451,7 @@ img,canvas,svg{max-width:100%;display:block}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
 /* ================================================================
-   PAGE-ENTER — re-runs on every route change because the wrapper
+   PAGE-ENTER - re-runs on every route change because the wrapper
    is keyed by route. Layers a fade + lift + accent flash bar so
    navigation (or reload) feels alive without a full page wipe.
 ================================================================ */
@@ -622,7 +622,7 @@ img,canvas,svg{max-width:100%;display:block}
   transition:all var(--dur-fast) var(--ease-out);
 }
 .contact-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
-/* Future-channel placeholder — dashed border + helper text. Static (no link). */
+/* Future-channel placeholder - dashed border + helper text. Static (no link). */
 .contact-slot{
   display:flex;flex-direction:column;gap:2px;
   padding:12px 14px;border:1px dashed color-mix(in oklch,var(--line-strong) 80%,transparent);
@@ -633,7 +633,7 @@ img,canvas,svg{max-width:100%;display:block}
 .contact-slot small{font-size:10px;color:var(--ink-4);opacity:.7;letter-spacing:.06em}
 
 /* ================================================================
-   CURSOR FX — shape changes per mode
+   CURSOR FX - shape changes per mode
 ================================================================ */
 .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;will-change:transform;transition:opacity 200ms, width 220ms var(--ease-out), height 220ms var(--ease-out), border-radius 220ms var(--ease-out), background 220ms, border-color 220ms, transform 16ms linear}
 .cursor-dot{width:8px;height:8px;background:var(--accent);box-shadow:0 0 12px var(--accent-glow);mix-blend-mode:plus-lighter;border-radius:50%}
@@ -641,7 +641,7 @@ img,canvas,svg{max-width:100%;display:block}
 .cursor-ring[data-hover="on"]{border-color:var(--accent);background:color-mix(in oklch,var(--accent) 14%,transparent);width:54px;height:54px}
 
 /* ----------------------------------------------------------------
-   CURSOR CONTRAST — accent sits at oklch(0.72), bright on dark
+   CURSOR CONTRAST - accent sits at oklch(0.72), bright on dark
    surfaces but vanishes on near-white. Fix: in LIGHT mode, swap
    the dot/ring to dark ink with a soft halo so it reads against
    both white pages and accent-tinted surfaces. Also add a faint
@@ -677,7 +677,7 @@ html[data-mode="light"][data-cursor="crosshair"] .cursor-dot::after{background:v
 html[data-mode="light"][data-cursor="crosshair"] .cursor-dot{border-color:var(--ink)}
 html[data-mode="light"] .cursor-ripple{background:var(--ink)}
 
-/* Per-mode SHAPES — set by data-cursor on <html> */
+/* Per-mode SHAPES - set by data-cursor on <html> */
 [data-cursor="crosshair"] .cursor-dot{border-radius:50%;width:10px;height:10px}
 [data-cursor="crosshair"] .cursor-ring{border-radius:50%}
 
@@ -802,7 +802,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 }
 
 /* ================================================================
-   HERO REFINEMENTS — marquee, status line, hp bar, monster card
+   HERO REFINEMENTS - marquee, status line, hp bar, monster card
 ================================================================ */
 .hero__statusline{
   display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:8px 14px;
@@ -856,7 +856,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 .hero__monslot[aria-pressed="true"]{background:color-mix(in oklch,var(--accent) 14%,var(--bg-sunken));border-color:var(--accent);box-shadow:0 0 18px var(--accent-glow)}
 
 /* ================================================================
-   IMPROVED PROJ CARD — show monster-name + status pill
+   IMPROVED PROJ CARD - show monster-name + status pill
 ================================================================ */
 .proj-card__status{
   /* Sits in a reserved track above the meta row so it can't
@@ -896,14 +896,9 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 .footer__bottom .blip{display:inline-flex;align-items:center;gap:6px}
 .footer__bottom .blip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
 
-/* Sign mark in hero — colon cursor sigil */
-.hero__title em::after{
-  content:"";display:inline-block;width:.32em;height:.06em;background:var(--accent);
-  vertical-align:.18em;margin-left:.05em;box-shadow:0 0 12px var(--accent-glow);
-}
 
 /* ================================================================
-   PILLS — small toggle chips (contact topic picker, filters)
+   PILLS - small toggle chips (contact topic picker, filters)
 ================================================================ */
 .pills{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .pill{
@@ -939,12 +934,12 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
   box-shadow:0 0 12px var(--accent-glow);
   transition:transform 80ms linear;
 }
-/* Scroll-following accent halo: removed by request — kept the class so JS still has a
+/* Scroll-following accent halo: removed by request - kept the class so JS still has a
    target to set --y on, but display:none stops it rendering. */
 .scroll-aura{display:none!important}
 
 /* ================================================================
-   SCROLL HINT (hero) — gentle nudge to scroll
+   SCROLL HINT (hero) - gentle nudge to scroll
    Lives BELOW the hero content (centered, in-flow) so it never
    overlaps the signal chips or the monster panel.
 ================================================================ */
@@ -972,7 +967,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 }
 
 /* ================================================================
-   STAGGERED REVEALS — children animate in sequence
+   STAGGERED REVEALS - children animate in sequence
    Apply class `reveal-stagger` to a container; its `.reveal`
    children get incremental delays based on --i (0..n) inline.
 ================================================================ */
@@ -1005,7 +1000,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 .sectionidx__dot[aria-current="true"]{background:var(--accent);box-shadow:0 0 12px var(--accent-glow);width:8px;height:8px}
 
 /* ================================================================
-   PARALLAX MONSTER (project cards) — gentle drift on hover
+   PARALLAX MONSTER (project cards) - gentle drift on hover
 ================================================================ */
 .proj-card__monster canvas{
   transition:transform 600ms var(--ease-out);
@@ -1020,7 +1015,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 .chip:hover{transform:translateY(-1px);border-color:color-mix(in oklch,var(--accent) 40%,var(--line));color:var(--ink)}
 
 /* ================================================================
-   SECTION HD — numbered ticket + tape
+   SECTION HD - numbered ticket + tape
 ================================================================ */
 .section__hd{position:relative}
 .section__idx{
@@ -1040,7 +1035,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 }
 
 /* ================================================================
-   MICRO ANIMATIONS — sparkle behind hero title
+   MICRO ANIMATIONS - sparkle behind hero title
 ================================================================ */
 .hero__title em{position:relative}
 .hero__title em::before{
@@ -1062,7 +1057,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
      DATA
 ============================================================= -->
 <script>
-/* window.__POSTS — blog/dispatch entries shown on /dispatch and /post/<id>.
+/* window.__POSTS - blog/dispatch entries shown on /dispatch and /post/<id>.
  * Fields: id, category, title, dek (subtitle), date (YYYY-MM-DD), readMin,
  *         featured?, tags[], body (markdown).
  * Categories used by the filter pills: ai · quant · research · gems
@@ -1089,29 +1084,73 @@ window.__POSTS = [
       "meta",
       "site"
     ],
-    "body": "LEAD: New coat of paint, same philosophy — no backend, no database, nothing between you and the content but a static file.\n\nThis site is a single HTML file plus a small publish layer. When I write a post, the editor commits it as JSON straight to the GitHub repo; GitHub Pages redeploys; you see it. The whole pipeline is auditable in the repo — there is no server to trust.\n\n## What's coming\n\nNotes from the GSoC '26 OpenVINO work, C++ systems things I learn the hard way, and the occasional tool worth sharing. Short, concrete, written when there's something to say.\n\n> If a post is here, it earned the commit."
+    "body": "LEAD: New paint, same philosophy. No backend, no database, nothing between you and the content but a static file.\n\nThis site is one HTML file plus a small publish layer. When I write a post, the editor commits it as JSON straight to the GitHub repo. Pages redeploys, and you see it. The whole pipeline sits in the repo where anyone can audit it. There is no server to trust.\n\n## What's coming\n\nNotes from the OpenVINO agent tooling I'm building, C++ things I learn the hard way, and the occasional tool worth sharing. Short, concrete, written when there's something to say.\n\n> If a post is here, it earned the commit."
   }
 ];
 
 window.__PROJECTS = [
-  {"id": "ovat", "title": "OVAT", "subtitle": "OpenVINO Agentic Toolkit for AI PCs", "year": "2026", "stack": ["Python", "OpenVINO", "OVMS", "YAML"], "flagship": true, "monsterId": "aureon", "accent": "gold", "repo": "https://github.com/Lagmator22/ovat", "summary": "Turns agent boilerplate into one YAML file and one command. OVAT runs tool-calling agents on Intel AI PCs against OpenVINO Model Server: describe the model, the tools, and the agent in workflow.yml, then ovat run does the rest.", "body": "A simple tool-calling agent against OpenVINO Model Server is really fifty lines of boilerplate: build the client, hand-write every tool's JSON schema, check finish_reason, dispatch the tool, append the result, loop, and babysit the message history. Every new agent copy-pastes that and slowly diverges.\n\nOVAT collapses all of it into a small workflow.yml and one command:\n\n  ovat run workflow.yml --input \"What do my notes say about Q3?\"\n\nWHAT IT HANDLES\nmodel wiring to OVMS (device, tool parser, endpoints)\ntool schemas generated from plain Python functions\nthe agent loop, iteration guards, and history management\n\nIt targets Intel AI PCs, with the GPU or NPU doing the heavy lifting. Python under the hood, YAML at the surface, no framework lock-in."},
-  {id:"ovasearch",title:"OvaSearch",subtitle:"Native C++ multimodal RAG engine",year:"2026",stack:["C++","OpenVINO","VLMPipeline","USearch","HNSW","GSoC 2026"],flagship:true,monsterId:"crystalith",accent:"indigo",
-    repo:"https://github.com/Lagmator22/OvaSearch",
-    summary:"A local-first multimodal retrieval engine: text, PDFs, and images flow through OpenVINO's VLM + text-embedding pipelines into a USearch HNSW index, with zero-copy image ingestion and a sliding-window chunker — all in portable C++. Selected for GSoC 2026.",
-    body:`A retrieval-augmented generation engine that runs natively in C++, accelerated by Intel OpenVINO. Designed for low-latency multimodal search across text, image, and audio embeddings without a Python runtime in the hot path.\n\n— BY THE NUMBERS —\nembedding dim: 384\nretrieval p50: ~6 ms\nindex: USearch HNSW\nruntime: OpenVINO CPU\n\n— WHY C++ —\nMost multimodal RAG stacks assume Python and a stack of model-serving daemons. OvaSearch is a single binary that wires VLMPipeline, TextEmbeddingPipeline, and LLMPipeline from OpenVINO directly, with a custom ImageAllocator for zero-copy image ingestion. No framework tax, no Python hop — which matters when you actually run this on a laptop.\n\n— INDEXING SHAPE —\nText and PDFs flow through a sliding-window chunker (1000 characters, 200 overlap). Images are captioned once by a Qwen2-VL pipeline and then chunked like any other document. A flat-file cache stores chunks, embeddings, and sources so cold-start reads are deterministic.\n\n— HOT PATH (sketch) —\n  // Retrieve top-k by cosine, then assemble context for the LLM\n  auto query = embed(question);                    // bge-small-en-v1.5 via OpenVINO\n  auto hits  = index.search(query, /*top_k=*/5);   // USearch HNSW\n  for (auto& h : hits) {\n    if (h.distance > 0.45f) continue;              // relevance floor\n    ctx.append(store.chunk_at(h.key), store.source_of(h.key));\n  }\n  llm.stream(build_prompt(ctx, question));         // Llama-3.2-3B INT4\n\n— WHAT'S NEXT —\nVideo + audio ingestion via keyframe sampling and whisper.cpp, hybrid lexical + semantic retrieval with BM25 + RRF, and an NPU/GPU switch for AIPC deployment. GSoC 2026 with OpenVINO is the through-line.`},
-  {id:"lisper",title:"Lisper",subtitle:"Local transcription studio on whisper.cpp + C++",year:"2026",stack:["C++","whisper.cpp","CMake"],flagship:true,monsterId:"volt",accent:"gold",
-    repo:"https://github.com/Lagmator22/Lisper",
-    summary:"A modular C++ speech-to-text tool built on whisper.cpp. Clean API boundaries so it slots in as a tool for agentic pipelines, a library for editors, or a standalone CLI — no cloud call, no Python, no surprises.",
-    body:`A native transcription studio wrapping whisper.cpp with a workflow for batch jobs, edit-as-you-listen review, and speaker labeling — all running on the device.\n\n— THE IDEA —\nEvery transcription tool I'd tried was either a wrapper around a cloud API or a GUI hiding whisper.cpp behind Electron. Lisper is the opposite: a small, modular C++ layer on top of whisper.cpp with a clean API that can be registered as an agentic tool or called as a library.\n\n— SHAPE —\nThe transcription pipeline, the model loader, and the I/O front-ends are separate compilation units, so embedders can pull exactly the pieces they need. The same codebase ships a REPL-ish CLI, a library surface, and (eventually) an editor plug-in.\n\n— STATS —\nruntime: whisper.cpp\nlanguage: C++\ndeps: CMake only\n\nBuilt out of frustration with web-based transcription tools that ship audio off your machine. Lisper keeps everything local: drag in audio, get a clean transcript with timestamps, edit, export.`},
-
-  // To add a new project: push another entry with the same shape as ovasearch / lisper above.
-  // Fields: id, title, subtitle, year, stack[], flagship?, monsterId, accent, repo?, summary, body?
-  // monsterId picks which 16×16 pixel familiar gets rendered on the card — see window.__MONSTERS.
-  // accent is a color key — see :root --accent-h overrides for the palette.
+  {
+    "id": "ovat",
+    "title": "OVAT",
+    "subtitle": "OpenVINO Agentic Toolkit for AI PCs",
+    "year": "2026",
+    "stack": [
+      "Python",
+      "OpenVINO",
+      "OVMS",
+      "YAML"
+    ],
+    "flagship": true,
+    "monsterId": "aureon",
+    "accent": "gold",
+    "repo": "https://github.com/Lagmator22/ovat",
+    "summary": "Turns agent boilerplate into one YAML file and one command. OVAT runs tool-calling agents on Intel AI PCs against OpenVINO Model Server: describe the model, the tools, and the agent in workflow.yml, then ovat run does the rest.",
+    "body": "A simple tool-calling agent against OpenVINO Model Server is really fifty lines of boilerplate: build the client, hand-write every tool's JSON schema, check finish_reason, dispatch the tool, append the result, loop, and babysit the message history. Every new agent copy-pastes that and slowly diverges.\n\nOVAT collapses all of it into a small workflow.yml and one command:\n\n  ovat run workflow.yml --input \"What do my notes say about Q3?\"\n\nWHAT IT HANDLES\nmodel wiring to OVMS (device, tool parser, endpoints)\ntool schemas generated from plain Python functions\nthe agent loop, iteration guards, and history management\n\nIt targets Intel AI PCs, with the GPU or NPU doing the heavy lifting. Python under the hood, YAML at the surface, no framework lock-in."
+  },
+  {
+    "id": "ovasearch",
+    "title": "OvaSearch",
+    "subtitle": "Native C++ multimodal RAG engine",
+    "year": "2026",
+    "stack": [
+      "C++",
+      "OpenVINO",
+      "VLMPipeline",
+      "USearch",
+      "HNSW"
+    ],
+    "flagship": true,
+    "monsterId": "crystalith",
+    "accent": "indigo",
+    "repo": "https://github.com/Lagmator22/OvaSearch",
+    "summary": "A local-first multimodal retrieval engine. Text, PDFs, and images flow through OpenVINO's VLM and text-embedding pipelines into a USearch HNSW index, with zero-copy image ingestion and a sliding-window chunker, all in portable C++.",
+    "body": "A retrieval-augmented generation engine that runs natively in C++, accelerated by Intel OpenVINO. Built for low-latency multimodal search across text, image, and audio embeddings without a Python runtime in the hot path.\n\nBY THE NUMBERS\nembedding dim: 384\nretrieval p50: ~6 ms\nindex: USearch HNSW\nruntime: OpenVINO CPU\n\nWHY C++\nMost multimodal RAG stacks assume Python and a stack of model-serving daemons. OvaSearch is a single binary that wires VLMPipeline, TextEmbeddingPipeline, and LLMPipeline from OpenVINO directly, with a custom ImageAllocator for zero-copy image ingestion. No framework tax, no Python hop. That matters when you actually run this on a laptop.\n\nINDEXING SHAPE\nText and PDFs flow through a sliding-window chunker (1000 characters, 200 overlap). Images are captioned once by a Qwen2-VL pipeline and then chunked like any other document. A flat-file cache stores chunks, embeddings, and sources so cold-start reads are deterministic.\n\nHOT PATH (sketch)\n  // Retrieve top-k by cosine, then assemble context for the LLM\n  auto query = embed(question);                    // bge-small-en-v1.5 via OpenVINO\n  auto hits  = index.search(query, /*top_k=*/5);   // USearch HNSW\n  for (auto& h : hits) {\n    if (h.distance > 0.45f) continue;              // relevance floor\n    ctx.append(store.chunk_at(h.key), store.source_of(h.key));\n  }\n  llm.stream(build_prompt(ctx, question));         // Llama-3.2-3B INT4\n\nWHAT'S NEXT\nVideo and audio ingestion via keyframe sampling and whisper.cpp, hybrid lexical plus semantic retrieval with BM25 and RRF, and an NPU/GPU switch for AI PC deployment."
+  },
+  {
+    "id": "lisper",
+    "title": "Lisper",
+    "subtitle": "Local transcription studio on whisper.cpp + C++",
+    "year": "2026",
+    "stack": [
+      "C++",
+      "whisper.cpp",
+      "CMake"
+    ],
+    "flagship": true,
+    "monsterId": "volt",
+    "accent": "gold",
+    "repo": "https://github.com/Lagmator22/Lisper",
+    "summary": "A modular C++ speech-to-text tool built on whisper.cpp. Clean API boundaries let it slot in as a tool for agentic pipelines, a library for editors, or a standalone CLI. No cloud call, no Python, no surprises.",
+    "body": "A native transcription studio wrapping whisper.cpp, with a workflow for batch jobs, edit-as-you-listen review, and speaker labeling, all running on the device.\n\nTHE IDEA\nEvery transcription tool I tried was either a wrapper around a cloud API or a GUI hiding whisper.cpp behind Electron. Lisper is the opposite: a small, modular C++ layer on top of whisper.cpp with a clean API that can be registered as an agentic tool or called as a library.\n\nSHAPE\nThe transcription pipeline, the model loader, and the I/O front-ends are separate compilation units, so embedders pull exactly the pieces they need. The same codebase ships a CLI, a library surface, and eventually an editor plug-in.\n\nSTATS\nruntime: whisper.cpp\nlanguage: C++\ndeps: CMake only\n\nBuilt out of frustration with web tools that ship your audio off your machine. Lisper keeps everything local: drag in audio, get a clean transcript with timestamps, edit, export."
+  }
 ];
+// To add a project: push another entry with the same shape (id, title, subtitle, year,
+// stack[], flagship?, monsterId, accent, repo?, summary, body?). monsterId picks the
+// 16x16 familiar from window.__MONSTERS; accent is a color key from the CSS.
+
 
 /* ======================================================================
-   MONSTERS — fully redesigned, Pokémon/Digimon-inspired silhouettes.
+   MONSTERS - fully redesigned, Pokémon/Digimon-inspired silhouettes.
    16×16 grid; characters: . transparent | L line | B body | S shade |
    H highlight | E eye | A accent. zones drive 4-frame walk/wing/tail/blink.
 ====================================================================== */
@@ -1121,7 +1160,7 @@ const tZ = (rows,xMax=5)=>[{rows,xMax,dx:[0,1,2,1],dy:[0,-1,0,1]}];
 const eZ = (rows)=>[{rows,xMin:5,xMax:10,dy:[0,0,0,0],blink:true}];
 
 window.__MONSTERS = [
-  // 0. Aureon — the legendary. Origin stag levitating inside a golden wheel.
+  // 0. Aureon - the legendary. Origin stag levitating inside a golden wheel.
   //    Generated ring geometry (midpoint circle, r=5.3) so the halo reads round.
   {id:"aureon",name:"Aureon",archetype:"Origin stag",element:"genesis",idle:"hover",speed:150,glow:.62,legendary:true,
     palette:{L:"#2e3160",B:"#eef0ff",S:"#a9b2dd",H:"#ffffff",E:"#3fe08c",A:"#ffd76b",R:"#d9a63a"},
@@ -1145,7 +1184,7 @@ window.__MONSTERS = [
     ],
     zones:[{rows:[11,12,13],xMin:6,xMax:12,dx:[0,0,0,0],dy:[0,1,1,0]},{rows:[6,7],xMin:13,dx:[0,1,1,0],dy:[0,-1,-1,0]}]},
 
-  // 1. Crystalith — gem dragon (Charmander-ish silhouette w/ crystal back)
+  // 1. Crystalith - gem dragon (Charmander-ish silhouette w/ crystal back)
   {id:"crystalith",name:"Crystalith",archetype:"Prism wyvern",element:"prism",idle:"hover",speed:170,glow:.42,
     palette:{L:"#1a0f3a",B:"#9b6cff",S:"#5530bf",H:"#dac8ff",E:"#fff",A:"#ffd86b"},
     pixels:[
@@ -1168,7 +1207,7 @@ window.__MONSTERS = [
     ],
     zones:[...lZ([12,13,14]), ...tZ([10,11,12,13],3)]},
 
-  // 2. Volt — spark fox (electric tail, pointy ears)
+  // 2. Volt - spark fox (electric tail, pointy ears)
   {id:"volt",name:"Volt",archetype:"Spark cub",element:"electric",idle:"march",speed:150,glow:.32,
     palette:{L:"#3a2a00",B:"#ffd23c",S:"#d08800",H:"#fff1a8",E:"#2a1700",A:"#fff7da"},
     pixels:[
@@ -1191,7 +1230,7 @@ window.__MONSTERS = [
     ],
     zones:[...lZ([11,12,13]), ...tZ([13,14],3,{dx:[0,-1,-2,-1]})]},
 
-  // 3. Moth — winged scholar
+  // 3. Moth - winged scholar
   {id:"moth",name:"Moth",archetype:"Paper-wing scholar",element:"research",idle:"flutter",speed:160,glow:.20,
     palette:{L:"#27182e",B:"#b190dd",S:"#7657a6",H:"#eadfff",E:"#fff",A:"#ffbfe8"},
     pixels:[
@@ -1214,7 +1253,7 @@ window.__MONSTERS = [
     ],
     zones:wZ([1,2,3,4,5,6])},
 
-  // 4. Warden — armored sentinel
+  // 4. Warden - armored sentinel
   {id:"warden",name:"Warden",archetype:"Vault sentinel",element:"shield",idle:"stomp",speed:220,glow:.18,
     palette:{L:"#2a0d0d",B:"#e25555",S:"#972727",H:"#ff9a9a",E:"#fff",A:"#ffd86b"},
     pixels:[
@@ -1237,7 +1276,7 @@ window.__MONSTERS = [
     ],
     zones:[...lZ([12,13])]},
 
-  // 5. Ink — glyph specter
+  // 5. Ink - glyph specter
   {id:"ink",name:"Ink",archetype:"Glyph specter",element:"draw",idle:"drift",speed:200,glow:.28,
     palette:{L:"#190820",B:"#d670ca",S:"#9c3894",H:"#ffb6ea",E:"#fff",A:"#62eeff"},
     pixels:[
@@ -1260,7 +1299,7 @@ window.__MONSTERS = [
     ],
     zones:[...tZ([11,12,13,14],8)]},
 
-  // 6. Pip — optic ooze (big eye)
+  // 6. Pip - optic ooze (big eye)
   {id:"pip",name:"Pip",archetype:"Optic ooze",element:"lens",idle:"blink",speed:200,glow:.30,
     palette:{L:"#032229",B:"#63ebff",S:"#1498b2",H:"#d3fbff",E:"#032229",A:"#ffd76c"},
     pixels:[
@@ -1283,7 +1322,7 @@ window.__MONSTERS = [
     ],
     zones:eZ([5,6,7,8,9])},
 
-  // 7. Ticker — market bat
+  // 7. Ticker - market bat
   {id:"moth2",name:"Ticker",archetype:"Market bat",element:"flow",idle:"flutter",speed:165,glow:.18,
     palette:{L:"#062316",B:"#4fd89b",S:"#1b8a59",H:"#baf4d4",E:"#062316",A:"#ffca45"},
     pixels:[
@@ -1306,7 +1345,7 @@ window.__MONSTERS = [
     ],
     zones:wZ([1,2,3,4,5])},
 
-  // 8. Dend — root drake
+  // 8. Dend - root drake
   {id:"dend",name:"Dend",archetype:"Root drake",element:"link",idle:"march",speed:175,glow:.18,
     palette:{L:"#281401",B:"#f08d3e",S:"#aa4f16",H:"#ffcb94",E:"#281401",A:"#ffd86b"},
     pixels:[
@@ -1329,7 +1368,7 @@ window.__MONSTERS = [
     ],
     zones:[...lZ([11,12,13]), ...tZ([13],4,{dx:[-1,0,1,0]})]},
 
-  // 9. Sprout — bloom saurian
+  // 9. Sprout - bloom saurian
   {id:"sprout",name:"Sprout",archetype:"Bloom saurian",element:"grow",idle:"march",speed:165,glow:.20,
     palette:{L:"#182700",B:"#b8e24a",S:"#6c9d17",H:"#e7f8ad",E:"#182700",A:"#ff5fae"},
     pixels:[
@@ -1352,7 +1391,7 @@ window.__MONSTERS = [
     ],
     zones:[...lZ([14,15])]},
 
-  // 10. Blipp — type automaton
+  // 10. Blipp - type automaton
   {id:"blipp",name:"Blipp",archetype:"Type automaton",element:"type",idle:"stomp",speed:215,glow:.22,
     palette:{L:"#000d21",B:"#5e9dff",S:"#1a5cd1",H:"#c6ddff",E:"#000d21",A:"#ffd86b"},
     pixels:[
@@ -1380,7 +1419,7 @@ window.__MONSTERS = [
 const _MI = Object.fromEntries(window.__MONSTERS.map(m=>[m.id,m]));
 const _active = new Set();
 /* Global pointer, shared by every mounted monster. Sentinel -1e4 means
-   "no pointer yet" (touch devices) — gaze stays disabled until real input. */
+   "no pointer yet" (touch devices) - gaze stays disabled until real input. */
 let _ptrX=-1e4,_ptrY=-1e4;
 addEventListener('pointermove',e=>{_ptrX=e.clientX;_ptrY=e.clientY},{passive:true});
 function _motion(){return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--motion"))||1}
@@ -1447,7 +1486,7 @@ function _draw(ctx,m,now,hover,px,gaze){
       const ch=row[x];if(!ch||ch===".")continue;
       const baseColor=blink&&ch==="E"?m.palette.L:m.palette[ch];if(!baseColor)continue;
       const [dx,dy]=mot>0?_off(m,x,y,phase):[0,0];
-      // Eyes slide sub-pixel toward the pointer — the "it's watching you" effect.
+      // Eyes slide sub-pixel toward the pointer - the "it's watching you" effect.
       let ex=0,ey=0;
       if(gaze&&ch==="E"&&mot>0){ex=gaze.gx*px*.3;ey=gaze.gy*px*.3}
       const px0=(x+dx)*px+ex,py0=(y+dy)*px+ey,h=px/2;
@@ -1466,7 +1505,7 @@ function _draw(ctx,m,now,hover,px,gaze){
       if(ch==="H"){ctx.fillStyle="rgba(255,255,255,.30)";ctx.fillRect(px0,py0,px,h*.6)}
     }
   }
-  // Pass 2: outline — darken outer-edge cells where neighbor is empty (fang/silhouette definition)
+  // Pass 2: outline - darken outer-edge cells where neighbor is empty (fang/silhouette definition)
   ctx.fillStyle=m.palette.L||"rgba(0,0,0,.55)";
   for(let y=0;y<grid;y++){
     for(let x=0;x<grid;x++){
@@ -1477,7 +1516,7 @@ function _draw(ctx,m,now,hover,px,gaze){
       if(!_cell(m,x,y+1))ctx.fillRect(px0,py0+px-1,px,1);
       // right edge if cell right empty
       if(!_cell(m,x+1,y))ctx.fillRect(px0+px-1,py0,1,px);
-      // top edge highlight inverse — use thin dark line for crisp silhouette top
+      // top edge highlight inverse - use thin dark line for crisp silhouette top
       if(!_cell(m,x,y-1)){ctx.save();ctx.globalAlpha=.5;ctx.fillRect(px0,py0,px,1);ctx.restore()}
       if(!_cell(m,x-1,y)){ctx.save();ctx.globalAlpha=.5;ctx.fillRect(px0,py0,1,px);ctx.restore()}
     }
@@ -1703,7 +1742,7 @@ const _io = new IntersectionObserver((entries)=>{
 },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
 window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in)').forEach(el=>_io.observe(el));
 
-/* Pointer parallax — lerped --mx/--my in [-1,1] drive the aurora,
+/* Pointer parallax - lerped --mx/--my in [-1,1] drive the aurora,
    hero grid and hero stage transforms. Skipped on touch devices. */
 (function(){
   if (window.matchMedia('(hover: none)').matches) return;
@@ -1726,7 +1765,7 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
   const bar = document.createElement('div');
   bar.className = 'scrollprog';
   document.body.appendChild(bar);
-  // Soft accent aura that drifts down the page as you scroll —
+  // Soft accent aura that drifts down the page as you scroll -
   // adds a subtle "you are here" focus glow without being chrome.
   const aura = document.createElement('div');
   aura.className = 'scroll-aura';
@@ -1786,7 +1825,7 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
 
 <script type="text/babel">
 /* ============================================================
- * REACT APP — single Babel-transpiled module
+ * REACT APP - single Babel-transpiled module
  * ============================================================
  * No bundler. Babel-in-browser handles JSX at page load. All
  * components live in this one script for editability.
@@ -1821,7 +1860,7 @@ const MONSTERS = window.__MONSTERS;
 const ACCENTS = ['indigo', 'purple', 'blue', 'cyan', 'green', 'yellow', 'gold', 'orange', 'red', 'pink'];
 
 /* ------------------------------------------------------------
-   useDataStore — subscribe the React tree to the publish-layer
+   useDataStore - subscribe the React tree to the publish-layer
    DataStore so that any successful publish (which calls
    DataStore.replace) re-renders the app with the new array.
 
@@ -1953,7 +1992,7 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
             <div>
               <div className="kicker reveal">portfolio · '26 · v3</div>
               <h1 className="hero__title reveal">i ship <em>small</em><span className="hero__ws"> </span>things that quietly out-run big ones.</h1>
-              <p className="hero__dek reveal">ai &amp; c++ systems engineer. i live in the hot path — inference runtimes, edge accelerators, and local-first software that doesn't ask permission to leave your machine. ten pixel familiars stand guard.</p>
+              <p className="hero__dek reveal">ai and c++ systems engineer. i build for the hot path: inference runtimes, edge accelerators, and local-first software that never phones home. eleven pixel familiars stand guard.</p>
               <div className="hero__cta reveal">
                 <button className="btn btn--primary" onClick={() => nav('projects')}>see the work <span className="arrow">→</span></button>
                 <button className="btn" onClick={() => nav('blog')}>read the dispatch</button>
@@ -1962,7 +2001,7 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
               <div className="hero__statusline reveal">
                 <span className="dotpulse" /><span>now</span>
                 <span className="hero__sep" />
-                <span>gsoc '26 · ovasearch · openvino kernels landing weekly</span>
+                <span>building ovat · agent tooling on openvino · shipping weekly</span>
               </div>
             </div>
             <div className="hero__stage reveal">
@@ -2011,7 +2050,7 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
               <div className="section__idx">02 / WORK · {projects.length} SHIPPED</div>
               <h2 className="section__title">Things I made. Things that <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)' }}>kept running</em>.</h2>
             </div>
-            <p className="section__copy">Each project is paired with a pixel familiar — a 16×16 silhouette that lives in the codebase and pops up wherever the work shows its face.</p>
+            <p className="section__copy">Every project gets a pixel familiar, a 16 by 16 guardian that shows up wherever the work does.</p>
           </div>
           <div className="proj-grid reveal-stagger">
             {projects.slice(0, 6).map((p, i) =>
@@ -2123,7 +2162,7 @@ function ProjectsPage({ projects, onProject }) {
             <div className="section__idx">PROJECTS · {projects.length} · {flag.length} FLAGSHIP</div>
             <h2 className="section__title">Everything I've shipped (and what's <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)' }}>cooking</em>).</h2>
           </div>
-          <p className="section__copy">From a multimodal RAG engine on bare OpenVINO to a 600-line transcription studio. Each project rides with a familiar — hover one and watch it move.</p>
+          <p className="section__copy">From agent tooling on OpenVINO to a native transcription studio. Each project rides with a familiar. Hover one and watch it move.</p>
         </div>
 
         {flag.length > 0 && <>
@@ -2234,7 +2273,7 @@ function ProjectPage({ project, owner, onSave, onBack }) {
                 <div className="field"><label>stack (comma-separated)</label><input value={draft.stack} onChange={(e) => setDraft({ ...draft, stack: e.target.value })} /></div>
                 <div className="field"><label>monster</label>
                   <select value={draft.monsterId} onChange={(e) => setDraft({ ...draft, monsterId: e.target.value })}>
-                    {MONSTERS.map((m) => <option key={m.id} value={m.id}>{m.name} — {m.archetype}</option>)}
+                    {MONSTERS.map((m) => <option key={m.id} value={m.id}>{m.name} · {m.archetype}</option>)}
                   </select>
                 </div>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -2408,11 +2447,11 @@ function About() {
       <div className="shell" style={{ maxWidth: 820 }}>
         <div className="kicker reveal">about · operator manual</div>
         <h1 className="reveal" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,5vw,64px)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1, margin: '8px 0 28px', textWrap: 'balance' }}>
-          I write software that runs <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontWeight: 500 }}>where you are</em> — not where the cloud sells you ad space.
+          I write software that runs <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontWeight: 500 }}>where you are</em>, not where the cloud sells you ad space.
         </h1>
         <div style={{ fontFamily: 'var(--font-serif)', fontSize: 18, lineHeight: 1.7, color: 'var(--ink-2)' }}>
           <p className="reveal">I'm an AI &amp; C++ systems engineer. My current obsessions are edge inference, local-first AI, and the kind of tooling that makes one engineer feel like ten.</p>
-          <p className="reveal">I work in whatever language the problem asks for — usually C++ for the inner loop, Rust for the shell, TypeScript for the surface. I dislike abstractions that don't earn their keep, and most of them don't.</p>
+          <p className="reveal">I work in whatever language the problem asks for: usually C++ for the inner loop, Rust for the shell, TypeScript for the surface. I dislike abstractions that don't earn their keep, and most of them don't.</p>
           <p className="reveal">When I'm not shipping, I'm reading papers, drawing pixel monsters, or arguing about borrow-checker ergonomics with people who should know better.</p>
         </div>
 
@@ -2442,10 +2481,10 @@ function About() {
         <div className="reveal" style={{ marginTop: 32, padding: 24, border: '1px solid var(--line)', borderRadius: 14, background: 'var(--bg-raised)' }}>
           <div className="kicker">currently · {new Date().toISOString().slice(0,10)}</div>
           <ul style={{ margin: '12px 0 0', paddingLeft: 18, lineHeight: 1.8, color: 'var(--ink-2)', fontFamily: 'var(--font-mono)', fontSize: 14 }}>
-            <li>landing OpenVINO multimodal kernels for OvaSearch (GSoC '26)</li>
-            <li>writing dispatch notes from the GSoC work as it lands</li>
+            <li>building OVAT, agent tooling for AI PCs on OpenVINO</li>
+            <li>writing dispatch notes as the work lands</li>
             <li>maintaining the dispatch above</li>
-            <li>drawing two more familiars to round out the bestiary at twelve</li>
+            <li>drawing the twelfth familiar for the bestiary</li>
           </ul>
         </div>
       </div>
@@ -2454,14 +2493,14 @@ function About() {
 }
 
 /* ============= CONTACT =============
- * The form posts to FormSubmit (https://formsubmit.co) — a free
+ * The form posts to FormSubmit (https://formsubmit.co) - a free
  * no-signup relay that forwards submissions to the owner inbox.
  *
  * Activation: the first time anyone submits this form, FormSubmit
  * sends a confirmation email to the owner inbox. CLICK THE LINK
  * in that email once to activate; submissions land in the inbox
  * from then on. To change the receiving address, swap the parts
- * in INBOX_PARTS below — it is assembled from fragments so the
+ * in INBOX_PARTS below - it is assembled from fragments so the
  * literal email never appears in the rendered DOM.
  *
  * To rotate to an opaque hashed endpoint (recommended if you ever
@@ -2499,7 +2538,7 @@ async function validateEmail(email) {
   const domain = email.split('@')[1].toLowerCase();
   const mx = await _domainHasMx(domain);
   if (mx === false) return { ok: false, reason: 'No mail server found for "' + domain + '". Check the spelling.' };
-  // mx === null means DNS check itself failed — let it through; FormSubmit will catch the rest.
+  // mx === null means DNS check itself failed - let it through; FormSubmit will catch the rest.
   return { ok: true };
 }
 
@@ -2562,7 +2601,7 @@ function Contact() {
       <div className="shell">
         <div className="section__hd reveal">
           <div><div className="section__idx">CONTACT · always open</div><h2 className="section__title">Drop a line. Or two. <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)' }}>I read everything.</em></h2></div>
-          <p className="section__copy">For collaborations, commissions, recruiting, or to argue about C++ template instantiation rules. I reply within a week — usually a day.</p>
+          <p className="section__copy">For collaborations, commissions, recruiting, or to argue about C++ template instantiation rules. I reply within a week, usually within a day.</p>
         </div>
         <div className="contact-grid">
           <form className="contact-form reveal" onSubmit={submit}>
@@ -2588,7 +2627,7 @@ function Contact() {
               </div>
             </div>
             <div className="field"><label>message</label><textarea value={draft.msg} onChange={(e) => setDraft({ ...draft, msg: e.target.value })} placeholder="hey gurman, …" required /></div>
-            {/* Honeypot — invisible to humans, irresistible to naive bots. */}
+            {/* Honeypot - invisible to humans, irresistible to naive bots. */}
             <label aria-hidden="true" tabIndex={-1} style={{ position:'absolute', left:'-9999px', top:0, opacity:0, pointerEvents:'none' }}>
               keep this field empty
               <input type="text" name="_honey" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
@@ -2742,7 +2781,7 @@ function PostEditor({ post, onSave, onCancel, onExport }) {
         <div style={{ flex: 1 }} />
         <button className="btn btn--sm" onClick={() => onExport(d)}>copy json</button>
         <button className="btn btn--sm" onClick={save}>save draft</button>
-        {PB && <PB scope="posts" item={cleanPost()} update={!!post} small onDone={(r) => { if (r && r.ok && !r.queued) { /* publish succeeded — drop the local draft for this id */ onSave({ ...cleanPost(), _publishedAt: Date.now() }); } }} />}
+        {PB && <PB scope="posts" item={cleanPost()} update={!!post} small onDone={(r) => { if (r && r.ok && !r.queued) { /* publish succeeded - drop the local draft for this id */ onSave({ ...cleanPost(), _publishedAt: Date.now() }); } }} />}
       </div>
       <div className="editor__body">
         <div className="editor__pane editor__pane--write">
@@ -2758,14 +2797,14 @@ function PostEditor({ post, onSave, onCancel, onExport }) {
             <div className="field"><label>date</label><input value={d.date} onChange={(e) => setD({ ...d, date: e.target.value })} /></div>
           </div>
           <div className="field"><label>tags (comma)</label><input value={tagsRaw} onChange={(e) => setTagsRaw(e.target.value)} placeholder="rust, edge, inference" /></div>
-          <div className="field"><label>body — markdown</label>
+          <div className="field"><label>body (markdown)</label>
             <textarea style={{ minHeight: '40vh' }} value={d.body} onChange={(e) => setD({ ...d, body: e.target.value })}
             placeholder={"LEAD: Your hook sentence.\n\n## A heading\n\nSome **bold** and *italic*.\n\n- list item\n- another\n\n> a pull quote\n\n```js\ncode block\n```"} />
           </div>
           <details style={{ marginTop: 10, fontSize: 12, color: 'var(--ink-3)' }}>
             <summary style={{ cursor: 'pointer' }}>markdown cheatsheet</summary>
             <ul style={{ paddingLeft: 18, lineHeight: 1.7 }}>
-              <li><code>LEAD: …</code> — italic lead paragraph</li>
+              <li><code>LEAD: …</code> italic lead paragraph</li>
               <li><code>## H2</code> / <code>### H3</code></li>
               <li><code>**bold**</code>, <code>*italic*</code>, <code>`inline code`</code></li>
               <li><code>- item</code> for lists</li>
@@ -2804,7 +2843,7 @@ function PostEditor({ post, onSave, onCancel, onExport }) {
  * `ownerHash` field of TWEAK_DEFAULTS at the top of <head>). The page never
  * sees plaintext, and no plaintext lives in the source.
  *
- * Unlocking does NOT grant write access to GitHub — it only reveals the
+ * Unlocking does NOT grant write access to GitHub - it only reveals the
  * editor UI in this browser. Real publishing also requires a GitHub PAT
  * configured in the Owner Console (#/console).
  *

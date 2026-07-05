@@ -11,6 +11,6 @@
       "meta",
       "site"
     ],
-    "body": "LEAD: New coat of paint, same philosophy — no backend, no database, nothing between you and the content but a static file.\n\nThis site is a single HTML file plus a small publish layer. When I write a post, the editor commits it as JSON straight to the GitHub repo; GitHub Pages redeploys; you see it. The whole pipeline is auditable in the repo — there is no server to trust.\n\n## What's coming\n\nNotes from the GSoC '26 OpenVINO work, C++ systems things I learn the hard way, and the occasional tool worth sharing. Short, concrete, written when there's something to say.\n\n> If a post is here, it earned the commit."
+    "body": "LEAD: New paint, same philosophy. No backend, no database, nothing between you and the content but a static file.\n\nThis site is one HTML file plus a small publish layer. When I write a post, the editor commits it as JSON straight to the GitHub repo. Pages redeploys, and you see it. The whole pipeline sits in the repo where anyone can audit it. There is no server to trust.\n\n## What's coming\n\nNotes from the OpenVINO agent tooling I'm building, C++ things I learn the hard way, and the occasional tool worth sharing. Short, concrete, written when there's something to say.\n\n> If a post is here, it earned the commit."
   }
 ]
