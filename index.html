@@ -828,6 +828,26 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 .hero__monstats{font-family:var(--font-mono);font-size:10px;color:var(--ink-3);text-align:right;line-height:1.6}
 .hero__monstats b{color:var(--ink-4);margin-right:6px;font-weight:500;letter-spacing:.1em}
 .hero__monroster{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.hero__guards{
+  display:inline-flex;align-items:center;gap:6px;margin-top:8px;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;
+  color:var(--accent);padding:4px 10px;border-radius:999px;
+  border:1px solid color-mix(in oklch,var(--accent) 45%,var(--line));
+  background:color-mix(in oklch,var(--accent) 10%,transparent);
+  transition:all var(--dur-fast) var(--ease-out);
+}
+.hero__guards:hover{background:color-mix(in oklch,var(--accent) 20%,transparent);transform:translateY(-1px)}
+.hero__guards--idle{color:var(--ink-4);border-color:var(--line);background:transparent;cursor:default}
+.hero__monslot--legend{
+  grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;
+  border-color:color-mix(in oklch,oklch(0.85 0.13 85) 55%,var(--line));
+  background:linear-gradient(135deg,color-mix(in oklch,oklch(0.85 0.13 85) 12%,var(--bg-sunken)),var(--bg-sunken));
+}
+.hero__monslot--legend small{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:oklch(0.8 0.12 85);
+}
+.hero__monslot--legend[aria-pressed="true"]{box-shadow:0 0 22px color-mix(in oklch,oklch(0.85 0.13 85) 45%,transparent)}
 .hero__monslot{
   padding:6px;border-radius:8px;background:var(--bg-sunken);border:1px solid var(--line);
   display:grid;place-items:center;transition:all var(--dur-fast) var(--ease-out);
@@ -1074,6 +1094,7 @@ window.__POSTS = [
 ];
 
 window.__PROJECTS = [
+  {"id": "ovat", "title": "OVAT", "subtitle": "OpenVINO Agentic Toolkit for AI PCs", "year": "2026", "stack": ["Python", "OpenVINO", "OVMS", "YAML"], "flagship": true, "monsterId": "aureon", "accent": "gold", "repo": "https://github.com/Lagmator22/ovat", "summary": "Turns agent boilerplate into one YAML file and one command. OVAT runs tool-calling agents on Intel AI PCs against OpenVINO Model Server: describe the model, the tools, and the agent in workflow.yml, then ovat run does the rest.", "body": "A simple tool-calling agent against OpenVINO Model Server is really fifty lines of boilerplate: build the client, hand-write every tool's JSON schema, check finish_reason, dispatch the tool, append the result, loop, and babysit the message history. Every new agent copy-pastes that and slowly diverges.\n\nOVAT collapses all of it into a small workflow.yml and one command:\n\n  ovat run workflow.yml --input \"What do my notes say about Q3?\"\n\nWHAT IT HANDLES\nmodel wiring to OVMS (device, tool parser, endpoints)\ntool schemas generated from plain Python functions\nthe agent loop, iteration guards, and history management\n\nIt targets Intel AI PCs, with the GPU or NPU doing the heavy lifting. Python under the hood, YAML at the surface, no framework lock-in."},
   {id:"ovasearch",title:"OvaSearch",subtitle:"Native C++ multimodal RAG engine",year:"2026",stack:["C++","OpenVINO","VLMPipeline","USearch","HNSW","GSoC 2026"],flagship:true,monsterId:"crystalith",accent:"indigo",
     repo:"https://github.com/Lagmator22/OvaSearch",
     summary:"A local-first multimodal retrieval engine: text, PDFs, and images flow through OpenVINO's VLM + text-embedding pipelines into a USearch HNSW index, with zero-copy image ingestion and a sliding-window chunker — all in portable C++. Selected for GSoC 2026.",
@@ -1100,6 +1121,30 @@ const tZ = (rows,xMax=5)=>[{rows,xMax,dx:[0,1,2,1],dy:[0,-1,0,1]}];
 const eZ = (rows)=>[{rows,xMin:5,xMax:10,dy:[0,0,0,0],blink:true}];
 
 window.__MONSTERS = [
+  // 0. Aureon — the legendary. Origin stag levitating inside a golden wheel.
+  //    Generated ring geometry (midpoint circle, r=5.3) so the halo reads round.
+  {id:"aureon",name:"Aureon",archetype:"Origin stag",element:"genesis",idle:"hover",speed:150,glow:.62,legendary:true,
+    palette:{L:"#2e3160",B:"#eef0ff",S:"#a9b2dd",H:"#ffffff",E:"#3fe08c",A:"#ffd76b",R:"#d9a63a"},
+    pixels:[
+      "................",
+      "....A.A.RR......",
+      "....HHHL..RRR...",
+      "..BEBBBL....RR..",
+      "..LLBBBL.....RR.",
+      "..R.LLBBL.......",
+      "..R...BBBL....AL",
+      "..R...LHHHHHHHL.",
+      ".RR...BBBBBBBBLR",
+      "..R...BBBBBBBBLR",
+      "..R...LLSSSSLL.R",
+      "..R....BLSLBLSR.",
+      "...R...BLS.BLSR.",
+      "...RR..AL..ALR..",
+      ".....R.L...L....",
+      ".......RRR......"
+    ],
+    zones:[{rows:[11,12,13],xMin:6,xMax:12,dx:[0,0,0,0],dy:[0,1,1,0]},{rows:[6,7],xMin:13,dx:[0,1,1,0],dy:[0,-1,-1,0]}]},
+
   // 1. Crystalith — gem dragon (Charmander-ish silhouette w/ crystal back)
   {id:"crystalith",name:"Crystalith",archetype:"Prism wyvern",element:"prism",idle:"hover",speed:170,glow:.42,
     palette:{L:"#1a0f3a",B:"#9b6cff",S:"#5530bf",H:"#dac8ff",E:"#fff",A:"#ffd86b"},
@@ -1131,11 +1176,11 @@ window.__MONSTERS = [
       "...L.........L..",
       "..LBL.......LBL.",
       ".LHBBL.....LBBHL",
-      "LHBBBBL...LBBBBHL".substring(0,16),
+      "LHBBBBL..LBBBBHL",
       ".LBBBBBL.LBBBBBL",
       "..LHBBBBBBBBBBL.",
-      "..LBBBELEEBBBBL.",
-      "..LBBBLLLLBBBBL.",
+      "..LBBEEBBBEEBBL.",
+      "..LBBBBLLLBBBBL.",
       "..LHBBBABBBBBBL.",
       "...LBBSSSBBSSL..",
       "...LSSL.LLSLL...",
@@ -1928,9 +1973,15 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
               <div className="hero__card">
                 <div className="hero__cardrow">
                   <div>
-                    <div className="kicker">active familiar · lv. {String(MONSTERS.findIndex(m=>m.id===activeMonster.id)+1).padStart(2,'0')}</div>
+                    <div className="kicker">{activeMonster.legendary ? 'legendary familiar' : `active familiar · lv. ${String(MONSTERS.findIndex(m=>m.id===activeMonster.id)+1).padStart(2,'0')}`}</div>
                     <div className="hero__monname">{activeMonster.name}</div>
                     <div className="hero__monarch">{activeMonster.archetype} · {activeMonster.element}</div>
+                    {(() => {
+                      const gp = projects.find(p => p.monsterId === activeMonster.id);
+                      return gp
+                        ? <button className="hero__guards" onClick={() => nav('projects/' + gp.id)}>guards {gp.title} <span className="arrow">→</span></button>
+                        : <div className="hero__guards hero__guards--idle">off duty, waiting for a project</div>;
+                    })()}
                   </div>
                   <div className="hero__monstats">
                     <div><b>SPD</b> {activeMonster.speed}</div>
@@ -1939,8 +1990,9 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
                 </div>
                 <div className="hero__monroster">
                   {MONSTERS.map((m) => <button key={m.id} onClick={() => setActiveMonster(m)} title={m.name} aria-pressed={activeMonster.id===m.id}
-                  className="hero__monslot">
-                    <Monster id={m.id} size={36} />
+                  className={'hero__monslot' + (m.legendary ? ' hero__monslot--legend' : '')}>
+                    <Monster id={m.id} size={m.legendary ? 44 : 36} />
+                    {m.legendary && <small>legendary · {m.name}</small>}
                   </button>)}
                 </div>
               </div>

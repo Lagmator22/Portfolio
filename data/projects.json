@@ -1,5 +1,23 @@
 [
   {
+    "id": "ovat",
+    "title": "OVAT",
+    "subtitle": "OpenVINO Agentic Toolkit for AI PCs",
+    "year": "2026",
+    "stack": [
+      "Python",
+      "OpenVINO",
+      "OVMS",
+      "YAML"
+    ],
+    "flagship": true,
+    "monsterId": "aureon",
+    "accent": "gold",
+    "repo": "https://github.com/Lagmator22/ovat",
+    "summary": "Turns agent boilerplate into one YAML file and one command. OVAT runs tool-calling agents on Intel AI PCs against OpenVINO Model Server: describe the model, the tools, and the agent in workflow.yml, then ovat run does the rest.",
+    "body": "A simple tool-calling agent against OpenVINO Model Server is really fifty lines of boilerplate: build the client, hand-write every tool's JSON schema, check finish_reason, dispatch the tool, append the result, loop, and babysit the message history. Every new agent copy-pastes that and slowly diverges.\n\nOVAT collapses all of it into a small workflow.yml and one command:\n\n  ovat run workflow.yml --input \"What do my notes say about Q3?\"\n\nWHAT IT HANDLES\nmodel wiring to OVMS (device, tool parser, endpoints)\ntool schemas generated from plain Python functions\nthe agent loop, iteration guards, and history management\n\nIt targets Intel AI PCs, with the GPU or NPU doing the heavy lifting. Python under the hood, YAML at the surface, no framework lock-in."
+  },
+  {
     "id": "ovasearch",
     "title": "OvaSearch",
     "subtitle": "Native C++ multimodal RAG engine",
