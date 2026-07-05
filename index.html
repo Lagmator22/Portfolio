@@ -282,8 +282,20 @@ img,canvas,svg{max-width:100%;display:block}
 .aurora{
   position:fixed;inset:-22%;z-index:0;pointer-events:none;
   filter:blur(90px) saturate(1.25);
-  transform:translate3d(calc(var(--mx,0)*20px),calc(var(--my,0)*14px - var(--scroll-y,0)*7vh),0);
+  transform:translate3d(calc(var(--mx,0)*70px),calc(var(--my,0)*50px - var(--scroll-y,0)*7vh),0);
 }
+/* Pointer aura: a soft accent pool that follows the cursor across the page.
+   --px/--py are lerped pixel coords from the parallax driver. */
+.pointer-glow{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(560px circle at var(--px,50vw) var(--py,38vh),
+    color-mix(in oklch,var(--accent) 13%,transparent),transparent 70%);
+}
+[data-mode="light"] .pointer-glow{
+  background:radial-gradient(560px circle at var(--px,50vw) var(--py,38vh),
+    color-mix(in oklch,var(--accent) 9%,transparent),transparent 70%);
+}
+[data-motion="none"] .pointer-glow{display:none}
 .aurora i{position:absolute;border-radius:50%;mix-blend-mode:screen}
 .aurora i:nth-child(1){width:46vw;height:46vw;left:4%;top:2%;background:radial-gradient(circle,oklch(0.55 0.17 var(--accent-h) / .5),transparent 66%);animation:auroraA 26s ease-in-out infinite alternate}
 .aurora i:nth-child(2){width:40vw;height:40vw;right:2%;top:14%;background:radial-gradient(circle,oklch(0.52 0.15 calc(var(--accent-h) + 70) / .38),transparent 66%);animation:auroraB 34s ease-in-out infinite alternate}
@@ -1037,6 +1049,7 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 </head>
 <body>
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="pointer-glow" aria-hidden="true"></div>
 <div class="noise"></div>
 <canvas id="cursor-canvas"></canvas>
 <div id="root"></div>
@@ -1803,6 +1816,8 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
     cx+=(tx-cx)*.07;cy+=(ty-cy)*.07;
     root.style.setProperty('--mx',cx.toFixed(4));
     root.style.setProperty('--my',cy.toFixed(4));
+    root.style.setProperty('--px',((cx+1)/2*innerWidth).toFixed(1)+'px');
+    root.style.setProperty('--py',((cy+1)/2*innerHeight).toFixed(1)+'px');
     raf=(Math.abs(tx-cx)+Math.abs(ty-cy)>.002)?requestAnimationFrame(step):0;
   }
   addEventListener('pointermove',e=>{
@@ -1858,6 +1873,46 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
   window.__hydrationPromise = window.DataStore.hydrate().catch((e) => {
     console.warn('[publish] data hydrate failed, falling back to inline data:', e);
   });
+</script>
+
+<!-- GSAP (free, incl. ScrollTrigger) - scroll choreography. Site works without it. -->
+<script src="https://unpkg.com/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script>
+/* Scroll choreography via ScrollTrigger. Pure enhancement: if GSAP fails to
+   load (offline, blocked CDN) the IntersectionObserver reveals still run. */
+(function(){
+  if(!(window.gsap&&window.ScrollTrigger))return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  gsap.registerPlugin(ScrollTrigger);
+  let t=0;
+  function setup(){
+    ScrollTrigger.getAll().forEach(st=>st.kill());
+    if(document.documentElement.getAttribute('data-motion')==='none')return;
+    // hero: stage sinks slower than the page, title drifts up.
+    // GSAP owns these transforms, so drop the .reveal state first;
+    // otherwise the tween captures reveal's translateY(28px) as its start.
+    document.querySelectorAll('.hero__stage, .hero__title').forEach(el=>el.classList.remove('reveal','in'));
+    document.querySelectorAll('.hero__stage').forEach(el=>{
+      gsap.fromTo(el,{y:0},{y:70,ease:'none',scrollTrigger:{trigger:el.closest('.hero')||el,start:'top top',end:'bottom top',scrub:.5}});
+    });
+    document.querySelectorAll('.hero__title').forEach(el=>{
+      gsap.fromTo(el,{y:0},{y:-40,ease:'none',scrollTrigger:{trigger:el.closest('.hero')||el,start:'top top',end:'bottom top',scrub:.5}});
+    });
+    // section headers scrub in; GSAP takes ownership from the IO reveal
+    document.querySelectorAll('.section__hd').forEach(el=>{
+      el.classList.remove('reveal','in');
+      gsap.fromTo(el,{y:36,opacity:0},{y:0,opacity:1,ease:'power2.out',
+        scrollTrigger:{trigger:el,start:'top 92%',end:'top 62%',scrub:.35}});
+    });
+  }
+  const queue=()=>{clearTimeout(t);t=setTimeout(setup,200)};
+  addEventListener('hashchange',queue);
+  addEventListener('load',queue);
+  new MutationObserver(ms=>{for(const m of ms)if(m.attributeName==='data-motion')queue()})
+    .observe(document.documentElement,{attributes:true});
+  queue();
+})();
 </script>
 
 <!-- React + Babel -->
