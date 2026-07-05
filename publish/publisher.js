@@ -13,10 +13,8 @@
      Publisher.connect()                     // build client from AuthStore
      Publisher.publishPost(post, opts)
      Publisher.publishProject(project, opts)
-     Publisher.publishStudy(item, opts)
      Publisher.deletePost(id, opts)
      Publisher.deleteProject(id, opts)
-     Publisher.deleteStudy(id, opts)
      Publisher.statusAsync()                 // last-publish state, rate limit, recent commits
      Publisher.copyPatch(scope, item)        // fallback: clipboard
 
@@ -237,29 +235,6 @@
       return this.publishProject({ id, _deleted: true }, opts);
     },
 
-    /* ---- study lab ---- */
-    async publishStudy(item, opts = {}) {
-      const p = { ...item };
-      if (!p.id) p.id = 's-' + Date.now();
-      if (p.url && /^data:|^blob:/.test(p.url)) {
-        throw new Error('Cannot publish a local file (data:/blob: URL). Paste a public URL or wire up a storage adapter in the Owner Console.');
-      }
-      const msg = opts.message || (item._deleted
-        ? `[study] delete ${p.id}`
-        : `[study] ${item._update ? 'update' : 'publish'} ${p.title || p.id}`);
-      const action = item._deleted ? 'delete' : (item._update ? 'update' : 'create');
-      return commit({
-        scope: 'study',
-        mutate: list => mergeItem(list, p),
-        message: msg,
-        mode: opts.mode,
-        onProgress: opts.onProgress,
-      }).then(r => ({ ...r, action }));
-    },
-    async deleteStudy(id, opts = {}) {
-      return this.publishStudy({ id, _deleted: true }, opts);
-    },
-
     /* ---- fallback: copy a patch to the clipboard ---- */
     copyPatch(scope, item) {
       const current = window.DataStore.get(scope) || [];
@@ -282,7 +257,6 @@
     // call enqueue on failure here creates an infinite duplication loop.
     window.PublishQueue.registerRunner('posts',    p => Publisher.publishPost(p, { mode: p._mode, noQueue: true }));
     window.PublishQueue.registerRunner('projects', p => Publisher.publishProject(p, { mode: p._mode, noQueue: true }));
-    window.PublishQueue.registerRunner('study',    p => Publisher.publishStudy(p, { mode: p._mode, noQueue: true }));
   }
 
   /* ---- wrap each public op so failures auto-queue ---- */
@@ -305,7 +279,6 @@
 
   Publisher.publishPost    = withQueueFallback('posts',    Publisher.publishPost.bind(Publisher));
   Publisher.publishProject = withQueueFallback('projects', Publisher.publishProject.bind(Publisher));
-  Publisher.publishStudy   = withQueueFallback('study',    Publisher.publishStudy.bind(Publisher));
 
   // Re-register on next tick (after queue module loads)
   setTimeout(registerRunners, 0);

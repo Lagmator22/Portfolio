@@ -10,7 +10,6 @@ on:
     paths:
       - 'data/posts.json'
       - 'data/projects.json'
-      - 'data/study.json'
       - '.github/scripts/build-sitemap.mjs'
       - '.github/scripts/build-og.mjs'
   workflow_dispatch:

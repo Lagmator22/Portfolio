@@ -9,10 +9,9 @@
      · Publish      — last publish, mode (one-click / PR), workflow toggles
      · Recent       — last 8 commits with author / message / SHA / link
      · Queue        — offline retry queue, manual flush
-     · Storage      — pluggable media adapter picker (none / R2 / B2 / gh-release)
      · Security     — optional password-lock for the stored token
 
-   Reads from AuthStore + Publisher + PublishQueue + StorageAdapter.
+   Reads from AuthStore + Publisher + PublishQueue.
    Mutates via AuthStore.setCfg / Publisher.publishX / etc.
 
    Exposed as `window.OwnerConsole` for the host HTML to mount on
@@ -311,42 +310,6 @@
     );
   }
 
-  /* ---------- storage adapter ---------- */
-
-  function StoragePanel() {
-    const [kind, setKind] = useState(() => window.StorageAdapter.currentKey());
-    const [config, setConfig] = useState(() => window.StorageAdapter.currentConfig());
-    const list = window.StorageAdapter.list();
-    const def = list.find(a => a.key === kind);
-    const save = () => {
-      window.StorageAdapter.configure(kind, config);
-      alert('Saved. New uploads will use ' + (def?.label || kind) + '.');
-    };
-    return (
-      <Card title="Media storage" kicker="05 / UPLOADS">
-        <p className="oc-empty" style={{ marginTop: 0 }}>
-          The portfolio publishes links by default — every Study Lab resource points at a URL on a host you control. Wire up free object storage to drop files in directly. None of this costs money under normal hobby load.
-        </p>
-        <Field label="adapter">
-          <select className="oc-input" value={kind} onChange={e => { setKind(e.target.value); setConfig({}); }}>
-            {list.map(a => (
-              <option key={a.key} value={a.key}>{a.label}{a.stub ? ' (stub)' : ''}</option>
-            ))}
-          </select>
-        </Field>
-        {def?.description && <p className="oc-msg">{def.description}</p>}
-        {(def?.configSchema || []).map(f => (
-          <Field key={f.key} label={f.label}>
-            <input className="oc-input" value={config[f.key] || ''} onChange={e => setConfig({ ...config, [f.key]: e.target.value })} placeholder={f.default || ''} />
-          </Field>
-        ))}
-        <div className="oc-actions">
-          <button className="btn btn--primary btn--sm" onClick={save}>save adapter</button>
-        </div>
-      </Card>
-    );
-  }
-
   /* ---------- security: lock token under password ---------- */
 
   function SecurityPanel({ summary, refresh }) {
@@ -437,7 +400,7 @@
   /* ---------- data sources panel ---------- */
 
   function DataSourcesPanel() {
-    const scopes = ['posts', 'projects', 'study'];
+    const scopes = ['posts', 'projects'];
     const sources = scopes.map(s => ({
       scope: s,
       path: window.DataStore.path(s),
@@ -480,10 +443,8 @@
       { id: 'owner',    label: 'Owner / Password' },
       { id: 'posts',    label: 'Posts' },
       { id: 'projects', label: 'Projects' },
-      { id: 'study',    label: 'Study Lab' },
       { id: 'monsters', label: 'Monsters' },
       { id: 'contact',  label: 'Contact form' },
-      { id: 'storage',  label: 'Media storage' },
       { id: 'csp',      label: 'CSP / security' },
     ];
 
@@ -496,18 +457,16 @@
         <P>Single-file vanilla HTML + React (in-browser Babel). No build step. The git repo on disk is at <code>portfolioV2ori/project/</code> (origin = <code>Lagmator22/Portfolio</code>). The bundle root <code>portfolioV2ori/</code> is NOT a git repo and contains <code>private-notes/</code>, a git-ignored folder with full versions of every doc that used to live in the repo.</P>
         <H>File map</H>
         <pre style={codeStyle}>{`index.html              Whole site — head, data arrays, cursor FX,
-                        React app (Home / Projects / Blog / Study /
+                        React app (Home / Projects / Blog /
                         About / Contact / Console).
 data/
   posts.json            Published posts (overrides inline __POSTS).
   projects.json         Published projects (overrides inline).
-  study.json            Published study items (overrides inline).
 publish/
   auth-store.js         PAT persistence + optional AES-GCM lock.
   github-api.js         REST client.
   data-store.js         JSON-first loader, inline fallback.
   publish-queue.js      Offline retry queue.
-  storage-adapter.js    Pluggable media uploaders.
   publisher.js          High-level publish ops.
   owner-console.jsx     This screen.
   publish-button.jsx    Reusable publish control.
@@ -519,7 +478,7 @@ private-notes/          Git-ignored. Full owner setup guide,
                         storage adapters, oauth-worker template,
                         architecture overview.`}</pre>
         <H>How runtime data flows</H>
-        <P>Boot: <code>DataStore.hydrate()</code> fetches <code>data/*.json</code> in parallel; if present + non-empty, it overwrites <code>window.__POSTS</code> / <code>__PROJECTS</code> / <code>__STUDY_DEFAULTS</code>. React reads from window. So editing the inline arrays in <code>index.html</code> changes the defaults; the JSON files are the canonical "published" state.</P>
+        <P>Boot: <code>DataStore.hydrate()</code> fetches <code>data/*.json</code> in parallel; if present + non-empty, it overwrites <code>window.__POSTS</code> / <code>__PROJECTS</code>. React reads from window. So editing the inline arrays in <code>index.html</code> changes the defaults; the JSON files are the canonical "published" state.</P>
       </>),
 
       owner: (<>
@@ -539,7 +498,7 @@ const TWEAK_DEFAULTS = {
         <H>If you forget the password</H>
         <P>No recovery flow — there's no server. Run the recipe with a new password and paste the new hash over the old one. Push. Done.</P>
         <H>Owner-only UI surfaces</H>
-        <P>Editor buttons on posts / projects / study tiles. "console" nav link. Owner badge in bottom-left. Locally drafted edits persist in <code>localStorage</code> until you click <strong>publish</strong>.</P>
+        <P>Editor buttons on posts / projects. "console" nav link. Owner badge in bottom-left. Locally drafted edits persist in <code>localStorage</code> until you click <strong>publish</strong>.</P>
       </>),
 
       posts: (<>
@@ -590,31 +549,6 @@ Anything else renders as a paragraph. HTML is escaped — even as owner.`}</pre>
         <P><code>indigo</code> · <code>purple</code> · <code>blue</code> · <code>cyan</code> · <code>green</code> · <code>yellow</code> · <code>gold</code> · <code>orange</code> · <code>red</code> · <code>pink</code></P>
       </>),
 
-      study: (<>
-        <P>Study lab items live in <code>data/study.json</code> and <code>STUDY_DEFAULTS</code> (inline). The site loader prefers a non-empty localStorage cache → remote JSON → inline defaults. An empty cache falls through, so old caches can't get stuck.</P>
-        <H>Item shape</H>
-        <pre style={codeStyle}>{`{
-  id:     "s-1",
-  kind:   "drive",            // see kinds below
-  title:  "CS-310 OS notes",
-  course: "cs-310",           // optional
-  tags:   ["os", "notes"],
-  url:    "https://drive.google.com/...",
-  note:   "",                 // one-line description, optional
-  added:  "2026-05-26"        // YYYY-MM-DD
-}`}</pre>
-        <H>Kinds (STUDY_KINDS)</H>
-        <pre style={codeStyle}>{`video   YouTube / Drive / Vimeo link, or small uploaded file.
-drive   Google Drive folder/file. Share = "anyone with link · viewer".
-code    Repo, gist, raw file, or playground (replit, stackblitz, godbolt).
-blog    Article link, including posts on this site (#/post/<id>).
-github  Full repo link. Add a course tag to group.
-slides  Google Slides / Slideshare / Figma deck.
-notes   Notion / HackMD / etc.
-link    Generic catch-all.`}</pre>
-        <P>To add a new kind: append <code>{`{ key: { label, glyph, hue } }`}</code> to <code>STUDY_KINDS</code> in index.html. The filter pills and tile color update automatically.</P>
-      </>),
-
       monsters: (<>
         <P>10 pixel familiars defined in <code>window.__MONSTERS</code>. Each is a 16×16 grid of characters. The renderer (<code>MonsterRenderer</code>) reads the grid and draws cel-shaded pixels frame-by-frame on a canvas.</P>
         <H>Grid character codes</H>
@@ -658,29 +592,6 @@ const INBOX_PARTS = ['new', 'address', '@', 'gmail', '.com'];
         <P>Strict regex catches malformed addresses. Cloudflare DNS-over-HTTPS (<code>cloudflare-dns.com/dns-query</code>) checks the domain has MX records. No MX → block. Cloudflare itself fails → let through (don't punish users for our flaky DNS).</P>
         <H>Rotate to an opaque hashed endpoint</H>
         <P>After confirming once, FormSubmit emails an <code>/ajax/&lt;hash&gt;</code> alias. Swap that into <code>CONTACT_ENDPOINT</code> and your email address is no longer reverse-engineerable from the JS source.</P>
-      </>),
-
-      storage: (<>
-        <P>Study Lab file uploads route through the active storage adapter. Default is <code>none</code> — uploads become inline data URLs that vanish on reload. To actually persist files, switch the adapter in the Media storage card above.</P>
-        <pre style={codeStyle}>{`none          No upload. Paste URLs only.
-gh-release    Uploads as Release assets on a "media" Release in
-              this repo. Free, 2 GB / file, public URLs forever.
-              Works immediately — no extra setup.
-r2            Cloudflare R2. 10 GB free, zero egress fees.
-              Needs a signing worker (template in
-              private-notes/oauth-worker.md).
-b2            Backblaze B2. Same shape as R2. Stub for now.`}</pre>
-        <P>For PDFs, lecture notes, course files → <code>gh-release</code> is the right choice. For long-form video, host on YouTube or Drive and paste the link instead.</P>
-        <H>Adapter contract (for adding a new one)</H>
-        <pre style={codeStyle}>{`// publish/storage-adapter.js
-adapters.myService = {
-  label:       'My Service',
-  description: 'What this is, free tier, caveats.',
-  async upload(file, opts, ctx) {
-    // Use ctx.gh (GithubAPI client) and ctx.token if needed.
-    // Return { url, bytes, name }.
-  }
-}`}</pre>
       </>),
 
       csp: (<>
@@ -790,7 +701,6 @@ https://cloudflare-dns.com   Email MX validation`}</pre>
             <RecentPanel status={status} busy={busy} />
             <QueuePanel />
             <DataSourcesPanel />
-            <StoragePanel />
             <SecurityPanel summary={summary} refresh={refresh} />
             <DevNotesPanel />
           </div>

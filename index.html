@@ -73,7 +73,6 @@ window.TWEAK_DEFAULTS = TWEAK_DEFAULTS;
  *  12. FOOTER        — four-column with brand
  *  13. HERO REFINEMENTS — marquee, status, monster card
  *  14. CURSOR LAB    — 9-tile picker on home
- *  15. STUDY LAB     — color-coded resource cards
  *  16. ABOUT         — stack columns
  *  17. SCROLL UX     — progress bar, hint, section index
  *  18. ANIMATIONS    — reveals, stagger, glow halos
@@ -927,84 +926,17 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 }
 
 /* ================================================================
-   STUDY LAB
+   PILLS — small toggle chips (contact topic picker, filters)
 ================================================================ */
-.study__controls{
-  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;
-  margin-bottom:24px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--bg-raised);
-}
-.study__pills{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.study__pill{
+.pills{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pill{
   font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;
   padding:6px 10px;border-radius:8px;background:var(--bg-sunken);
   border:1px solid var(--line);color:var(--ink-3);
   transition:all var(--dur-fast) var(--ease-out);
 }
-.study__pill:hover{color:var(--ink);border-color:var(--line-strong)}
-.study__pill[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.study__pill--course{font-style:italic;color:var(--ink-2)}
-.study__sep{color:var(--ink-4);padding:0 4px}
-.study__searchwrap{display:flex;gap:8px;align-items:center}
-.study__search{
-  padding:8px 12px;background:var(--bg-sunken);border:1px solid var(--line);border-radius:8px;
-  color:var(--ink);font-family:var(--font-mono);font-size:12px;min-width:200px;outline:none;
-  transition:border-color var(--dur-fast);
-}
-.study__search:focus{border-color:var(--accent)}
-.study__grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;
-}
-.study__card{
-  position:relative;border:1px solid var(--line);border-radius:14px;background:var(--bg-raised);
-  overflow:hidden;
-  /* --k-hue is set per-card from STUDY_KINDS[kind].hue (see StudyLab render) */
-  --k-hue:275;
-  --k-color:oklch(0.72 0.18 var(--k-hue));
-  --k-tint:color-mix(in oklch,var(--k-color) 14%,transparent);
-  --k-edge:color-mix(in oklch,var(--k-color) 40%,var(--line));
-  transition:transform var(--dur-base) var(--ease-out),border-color var(--dur-base),box-shadow var(--dur-base);
-}
-.study__card:hover{transform:translateY(-3px);border-color:var(--k-edge);box-shadow:0 14px 36px color-mix(in oklch,var(--k-color) 30%,transparent)}
-/* Placeholder tiles (no real URL yet) — visually inert. No hover lift,
-   default cursor, slightly dimmed. Owner edit button still works. */
-.study__card--placeholder{opacity:.72}
-.study__card--placeholder:hover{transform:none;box-shadow:none;border-color:var(--line)}
-.study__card--placeholder .study__cardlink{cursor:default}
-.study__card::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
-  background:linear-gradient(180deg,var(--k-color),transparent);
-  opacity:.7;
-}
-.study__cardlink{display:flex;flex-direction:column;gap:10px;padding:18px 18px 16px 22px;color:inherit;height:100%}
-.study__cardhd{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.study__kind{
-  font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--k-color);padding:3px 8px;border-radius:999px;
-  background:var(--k-tint);
-  border:1px solid var(--k-edge);
-}
-.study__course{
-  font-family:var(--font-mono);font-size:10px;color:var(--ink-4);letter-spacing:.08em;
-}
-.study__title{font-family:var(--font-display);font-size:18px;font-weight:600;letter-spacing:-0.01em;margin:0;line-height:1.25}
-.study__note{font-family:var(--font-serif);font-style:italic;font-size:13px;color:var(--ink-3);line-height:1.45;margin:0}
-.study__foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px;gap:8px}
-.study__tags{display:flex;gap:4px;flex-wrap:wrap}
-.study__date{font-family:var(--font-mono);font-size:10px;color:var(--ink-4);letter-spacing:.06em;flex-shrink:0}
-.study__ops{
-  position:absolute;top:12px;right:12px;display:flex;gap:4px;opacity:0;
-  transition:opacity var(--dur-fast);
-}
-.study__card:hover .study__ops{opacity:1}
-.study__empty{
-  grid-column:1/-1;padding:48px;text-align:center;color:var(--ink-3);
-  border:1px dashed var(--line);border-radius:14px;background:var(--bg-sunken);
-}
-.study__legend{
-  margin-top:32px;padding:20px 24px;border:1px solid var(--line);border-radius:14px;background:var(--bg-sunken);
-}
-.study__legend ul{margin:12px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2);line-height:1.55}
-.study__legend b{color:var(--accent);font-weight:500;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding-right:4px}
+.pill:hover{color:var(--ink);border-color:var(--line-strong)}
+.pill[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 
 /* ================================================================
    ABOUT
@@ -1814,7 +1746,7 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
 
 <!-- ============================================================
      PUBLISH LAYER (sync modules)
-     Order matters: auth → api → store → queue → adapter → publisher.
+     Order matters: auth → api → store → queue → publisher.
      Each module hangs its API on `window.*` so the React app can
      use it without imports.
      ============================================================ -->
@@ -1822,13 +1754,8 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
 <script src="publish/github-api.js"></script>
 <script src="publish/data-store.js"></script>
 <script src="publish/publish-queue.js"></script>
-<script src="publish/storage-adapter.js"></script>
 <script src="publish/publisher.js"></script>
 <script>
-  // Mirror the inline STUDY_DEFAULTS onto window so DataStore's fallback can find it.
-  // (StudyLab still reads the const locally — this is purely for the fallback path.)
-  // Lazily resolved after the babel app loads — set in the babel module's prelude.
-
   // Kick off JSON hydration immediately. The fetch is concurrent with React + Babel
   // initialisation, so by the time the app mounts the canonical data is usually in.
   // If hydrate finishes first → React renders against JSON.
@@ -1866,10 +1793,9 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
  *   Owner auth  → sha256 + OwnerLogin modal
  *   Nav         → top bar + mobile drawer
  *   Monster     → wraps the canvas pixel sprite
- *   Home        → hero / projects / cursor lab / dispatch / study
+ *   Home        → hero / projects / dispatch
  *   ProjectsPage / ProjectPage   → grid + detail
  *   Blog / PostReader / PostEditor / renderMarkdown
- *   StudyLab    → resource library (videos, pdfs, drive, etc)
  *   CursorLab   → live cursor picker
  *   About / Contact
  *   TweaksPanel / Cmdk          → floating controls
@@ -1904,7 +1830,6 @@ function useDataStore(scope) {
   return (window.DataStore && window.DataStore.get(scope))
     || (scope === 'posts'    ? window.__POSTS
        : scope === 'projects' ? window.__PROJECTS
-       : scope === 'study'    ? window.__STUDY_DEFAULTS
        : []);
 }
 
@@ -1957,7 +1882,7 @@ async function sha256(s) {
 /* ============= NAV ============= */
 function Nav({ route, onTweaks, onCmdk, owner }) {
   const [open, setOpen] = useState(false);
-  const links = [{ k: 'home', l: 'index' }, { k: 'projects', l: 'projects' }, { k: 'blog', l: 'dispatch' }, { k: 'study', l: 'study' }, { k: 'about', l: 'about' }, { k: 'contact', l: 'contact' }];
+  const links = [{ k: 'home', l: 'index' }, { k: 'projects', l: 'projects' }, { k: 'blog', l: 'dispatch' }, { k: 'about', l: 'about' }, { k: 'contact', l: 'contact' }];
   return <>
     <header className="nav">
       <div className="nav__row">
@@ -1996,8 +1921,8 @@ function Monster({ id, size = 96 }) {
 /* ============================================================
  * Home page
  * ------------------------------------------------------------
- * Composed of five stacked sections (hero / projects-preview /
- * cursor-lab / dispatch / study-preview). Each section is
+ * Composed of stacked sections (hero / projects-preview /
+ * dispatch). Each section is
  * tagged `data-section="<id>"` so the floating SectionIndex
  * dots can highlight + jump to it.
  *
@@ -2008,8 +1933,7 @@ const HOME_SECTIONS = [
   { id: 'hero',     label: 'index' },
   { id: 'work',     label: 'work' },
   { id: 'cursors',  label: 'cursors' },
-  { id: 'dispatch', label: 'dispatch' },
-  { id: 'study',    label: 'study lab' }
+  { id: 'dispatch', label: 'dispatch' }
 ];
 function Home({ posts, projects, onPost, onProject, setTweak }) {
   const [activeMonster, setActiveMonster] = useState(MONSTERS[0]);
@@ -2167,21 +2091,6 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
         </div>
       </section>
 
-      {/* STUDY LAB PREVIEW */}
-      <section className="section section--alt section--tape" data-section="study">
-        <div className="shell">
-          <div className="section__hd reveal">
-            <div>
-              <div className="section__idx">05 / STUDY LAB · UNI</div>
-              <h2 className="section__title">A shared <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)' }}>desk</em> for the cohort.</h2>
-            </div>
-            <p className="section__copy">Recorded lectures, scanned notes, problem-sets, Google Drive links — all in one place for the people I study with. Owner-curated, view-anywhere.</p>
-          </div>
-          <div style={{ display:'flex', justifyContent:'center' }}>
-            <button className="btn btn--primary" onClick={() => nav('study')}>walk into the lab <span className="arrow">→</span></button>
-          </div>
-        </div>
-      </section>
     </main>);
 
 }
@@ -2268,262 +2177,6 @@ function CursorLab({ onPick }) {
         </p>
       </div>
     </section>
-  );
-}
-
-/* ============= STUDY LAB ============= */
-/* ============================================================
- * STUDY LAB
- * ============================================================
- * A resource library curated by the owner, public-readable.
- * Stored in localStorage under STUDY_KEY so it survives reloads
- * on this static host.
- *
- * --------- ADDING A NEW RESOURCE KIND ---------
- * To add a new kind (e.g. "podcast", "spreadsheet"), do TWO things:
- *   1. Add a key + label + glyph + hue to STUDY_KINDS below.
- *   2. (optional) Add a .study__card--<kind>::before color rule
- *      in the CSS — otherwise it falls back to the accent gradient.
- * That's it. The filter pill, the editor modal, the card chip,
- * and the color accent all read off STUDY_KINDS automatically.
- *
- * --------- ADDING A RESOURCE ITEM ---------
- * Either sign in as owner and use the UI, or push directly to
- * STUDY_DEFAULTS below. Each item shape:
- *   { id, kind, title, course, tags:[], url, note, added }
- * ============================================================ */
-// Bumped to v3 to invalidate any browser-cached copies of the old demo
-// "Link 1/2/3 — replace url..." defaults from before the seed was emptied.
-const STUDY_KEY = 'gurman.study.v3';
-// hue is the OKLCH hue (0–360) used for the left-edge accent bar.
-// To add a new kind: drop a line here. To remove one: delete its line.
-const STUDY_KINDS = {
-  video:  { label: 'video',  glyph: '▶',  hue: 25  },
-  drive:  { label: 'drive',  glyph: '◇',  hue: 150 },
-  link:   { label: 'link',   glyph: '→',  hue: 245 },
-  notes:  { label: 'notes',  glyph: '✎',  hue: 310 },
-  code:   { label: 'code',   glyph: '〈〉', hue: 200 },
-  blog:   { label: 'blog',   glyph: '✦',  hue: 50  },
-  github: { label: 'github', glyph: '◉',  hue: 280 },
-  slides: { label: 'slides', glyph: '▤',  hue: 350 }
-};
-// STUDY_DEFAULTS = the seed list shown when data/study.json is empty.
-// Edit the title/url/note in place to point at real resources, or use the
-// Owner Console "+ link" button (persists to data/study.json on publish).
-// Item shape:
-//   { id, kind, title, course?, tags[], url, note?, added: 'YYYY-MM-DD' }
-// `kind` must be a key of STUDY_KINDS above (drive, video, link, notes,
-// code, blog, github, slides).
-const STUDY_DEFAULTS = [
-  { id: 's-link-1', kind: 'drive', title: 'Drive folder',  course: '', tags: [], url: '#', note: '', added: '2026-05-17' },
-  { id: 's-link-2', kind: 'drive', title: 'Drive folder',  course: '', tags: [], url: '#', note: '', added: '2026-05-17' },
-  { id: 's-link-3', kind: 'video', title: 'Video archive', course: '', tags: [], url: '#', note: '', added: '2026-05-17' }
-];
-window.__STUDY_DEFAULTS = STUDY_DEFAULTS; // exposed for publish/data-store.js fallback path
-function StudyLab({ owner }) {
-  const remoteStudy = useDataStore('study');
-  // Loader rule: localStorage represents the owner's local drafts. Use it
-  // only when it's a non-empty array. An empty array means "no drafts" —
-  // fall back to remote (data/study.json) or the inline STUDY_DEFAULTS.
-  // This prevents an empty cache (left over from a cache-key bump) from
-  // permanently overriding fresh remote/inline content.
-  const [items, setItems] = useState(() => {
-    try {
-      const r = JSON.parse(localStorage.getItem(STUDY_KEY));
-      if (Array.isArray(r) && r.length > 0) return r;
-    } catch {}
-    return remoteStudy && remoteStudy.length ? remoteStudy : STUDY_DEFAULTS;
-  });
-  // When the published study list updates from a publish, mirror it in if the
-  // local cache is missing or empty (no local drafts to clobber).
-  useEffect(() => {
-    if (!remoteStudy || !remoteStudy.length) return;
-    try {
-      const local = JSON.parse(localStorage.getItem(STUDY_KEY) || 'null');
-      if (!Array.isArray(local) || local.length === 0) setItems(remoteStudy);
-    } catch { setItems(remoteStudy); }
-  }, [remoteStudy]);
-  const [filter, setFilter] = useState('all');
-  const [search, setSearch] = useState('');
-  const [editing, setEditing] = useState(null);
-  const fileRef = useRef();
-  useEffect(() => { try { localStorage.setItem(STUDY_KEY, JSON.stringify(items)); } catch {}; window.__observeReveal?.(); }, [items]);
-  const kinds = ['all', ...Object.keys(STUDY_KINDS)];
-  const courses = Array.from(new Set(items.map(i => i.course).filter(Boolean)));
-  const filtered = items.filter(i =>
-    (filter === 'all' || i.kind === filter || i.course === filter) &&
-    (search === '' || i.title.toLowerCase().includes(search.toLowerCase()) || (i.note||'').toLowerCase().includes(search.toLowerCase()) || (i.tags||[]).some(t => t.toLowerCase().includes(search.toLowerCase())))
-  );
-  const save = (it) => {
-    setItems((prev) => {
-      const others = prev.filter(x => x.id !== it.id);
-      const next = { ...it, id: it.id || ('s-' + Date.now()), added: it.added || new Date().toISOString().slice(0,10) };
-      return [next, ...others];
-    });
-    setEditing(null);
-  };
-  const del = (it) => { if (confirm('Remove from study lab?')) setItems(prev => prev.filter(x => x.id !== it.id)); };
-  const onFile = async (e) => {
-    const f = e.target.files[0]; if (!f) return;
-    let url, note = 'uploaded · ' + Math.round(f.size/1024) + 'kb';
-    // Prefer a configured storage adapter so the URL survives a reload.
-    // Fall back to an inline data URL for unconfigured ('none') accounts.
-    try {
-      const adapter = window.StorageAdapter?.current();
-      if (adapter && adapter.kind && adapter.kind !== 'none') {
-        const r = await adapter.upload(f, { hint: 'study-lab' });
-        if (r?.url) { url = r.url; note += ' · ' + adapter.kind; }
-      }
-    } catch (err) {
-      console.warn('[study-lab] storage adapter upload failed, falling back to data URL:', err);
-    }
-    if (!url) {
-      url = await new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(f); });
-      note += ' · local (data URL — won\'t survive a reload)';
-    }
-    const kind = f.type.startsWith('video/') ? 'video' : 'link';
-    save({ id: 's-' + Date.now(), kind, title: f.name, course: editing?.course || '', tags: [], url, note, added: new Date().toISOString().slice(0,10) });
-    e.target.value = '';
-  };
-  return (
-    <main className="section">
-      <div className="shell">
-        <div className="section__hd reveal">
-          <div>
-            <div className="section__idx">STUDY LAB{items.length > 0 ? ' · ' + items.length + ' resources' : ''}</div>
-            <h2 className="section__title">A shared desk for the cohort.</h2>
-          </div>
-          <p className="section__copy">Lectures, scans, problem-sets, and Drive folders. Filter by course or kind. Click anything to open. {owner ? '' : 'Sign in as owner to add, edit, or remove.'}</p>
-        </div>
-
-        <div className="study__controls">
-          <div className="study__pills">
-            {kinds.map(k => (
-              <button key={k} aria-pressed={filter===k} onClick={() => setFilter(k)} className="study__pill">
-                {k === 'all' ? 'all' : (STUDY_KINDS[k]?.label || k)}
-              </button>
-            ))}
-            {courses.length > 0 && <span className="study__sep">/</span>}
-            {courses.map(c => (
-              <button key={c} aria-pressed={filter===c} onClick={() => setFilter(c)} className="study__pill study__pill--course">
-                {c}
-              </button>
-            ))}
-          </div>
-          <div className="study__searchwrap">
-            <input className="study__search" placeholder="search title, tag, note…" value={search} onChange={e => setSearch(e.target.value)} />
-            {owner && <>
-              <input ref={fileRef} type="file" accept="video/*" style={{ display:'none' }} onChange={onFile} />
-              <button className="btn btn--sm" onClick={() => fileRef.current.click()}>upload</button>
-              <button className="btn btn--primary btn--sm" onClick={() => setEditing({ kind:'link', title:'', course:'', tags:[], url:'', note:'' })}>+ link</button>
-            </>}
-          </div>
-        </div>
-
-        <div className="study__grid">
-          {filtered.map((it) => {
-            const k = STUDY_KINDS[it.kind] || { label: it.kind, glyph: '·', hue: 275 };
-            // A tile is "live" only when its URL is a real http(s) link.
-            // Placeholders that still hold "#" or empty render as non-clickable
-            // (no <a>, no target=_blank, no fake tab), with a "placeholder" note.
-            const live = typeof it.url === 'string' && /^https?:\/\//.test(it.url);
-            const inner = (<>
-              <div className="study__cardhd">
-                <span className="study__kind">{k.glyph} {k.label}</span>
-                {it.course && <span className="study__course">{it.course}</span>}
-              </div>
-              <h3 className="study__title">{it.title}</h3>
-              {it.note && <p className="study__note">{it.note}</p>}
-              <div className="study__foot">
-                <div className="study__tags">{(it.tags||[]).map(t => <span key={t} className="chip">#{t}</span>)}</div>
-                <span className="study__date">{it.added}</span>
-              </div>
-            </>);
-            return (
-              <article key={it.id} className={'study__card reveal' + (live ? '' : ' study__card--placeholder')} style={{ '--k-hue': k.hue }}>
-                {live ? (
-                  <a className="study__cardlink" href={it.url} target="_blank" rel="noopener noreferrer">{inner}</a>
-                ) : (
-                  <div className="study__cardlink" aria-disabled="true" title={owner ? 'No URL set yet — click edit to add one.' : 'Coming soon.'}>{inner}</div>
-                )}
-                {owner && (
-                  <div className="study__ops">
-                    <button className="btn btn--sm" onClick={() => setEditing(it)}>edit</button>
-                    <button className="btn btn--sm" onClick={() => del(it)}>×</button>
-                  </div>
-                )}
-              </article>
-            );
-          })}
-          {filtered.length === 0 && (
-            <div className="study__empty">
-              <div className="kicker">nothing here</div>
-              <p>No resources match your filter. {owner ? 'Add one with the buttons above.' : 'Check back when the owner uploads.'}</p>
-            </div>
-          )}
-        </div>
-
-        {/*
-          DEV NOTE (was rendered on the page — pulled out so visitors don't see
-          a "how to use this site" panel that screams demo template):
-
-          STUDY_KINDS reference — pick the right one when adding a resource:
-            video   — youtube / drive / vimeo link, or a small uploaded file. Opens in a new tab.
-            drive   — google drive folder or file. Set sharing to "anyone with the link · viewer".
-            code    — repo link, gist, raw file, or playground (replit, stackblitz, godbolt).
-            blog    — link to an article (including posts on this site: #/post/<id>).
-            github  — full repo link. Add a course tag to group related repos.
-            slides  — google slides, slideshare, figma deck, anywhere.
-            link/notes — anything else (notion, hackmd, gist, syllabus).
-
-          Adding a new kind: append `{ key: { label, glyph, hue } }` to STUDY_KINDS
-          above, add a matching `--k-hue-<key>` block in CSS if the hue isn't
-          already covered, and the filter pill + tile color show up automatically.
-        */}
-      </div>
-
-      {editing && (
-        <div className="modal-bg" onClick={(e) => { if (e.target === e.currentTarget) setEditing(null); }}>
-          <div className="modal">
-            <div className="kicker">{editing.id ? 'edit resource' : 'new resource'}</div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 600, letterSpacing: '-0.02em', margin: '6px 0 16px' }}>
-              {editing.kind === 'drive' ? 'add a drive link' : editing.kind === 'video' ? 'add a video link' : 'add a resource'}
-            </h2>
-            <div className="field"><label>kind</label>
-              <div className="study__pills" style={{ marginBottom: 0 }}>
-                {Object.keys(STUDY_KINDS).map(k => (
-                  <button key={k} className="study__pill" aria-pressed={editing.kind===k} onClick={() => setEditing({ ...editing, kind: k })}>
-                    {STUDY_KINDS[k].glyph} {STUDY_KINDS[k].label}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="field"><label>title</label><input value={editing.title} onChange={e => setEditing({ ...editing, title: e.target.value })} placeholder="e.g. OS Notes — Week 4" /></div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              <div className="field"><label>course (optional)</label><input value={editing.course || ''} onChange={e => setEditing({ ...editing, course: e.target.value })} placeholder="cs-310" /></div>
-              <div className="field"><label>tags (comma)</label><input value={(editing.tags||[]).join(', ')} onChange={e => setEditing({ ...editing, tags: e.target.value.split(',').map(s=>s.trim()).filter(Boolean) })} placeholder="os, scheduling" /></div>
-            </div>
-            <div className="field"><label>url{editing.kind === 'drive' ? ' · drive share link' : ''}</label>
-              <input value={editing.url} onChange={e => setEditing({ ...editing, url: e.target.value })} placeholder={editing.kind==='drive' ? 'https://drive.google.com/drive/folders/...' : 'https://...'} />
-            </div>
-            <div className="field"><label>note (one line, optional)</label><input value={editing.note || ''} onChange={e => setEditing({ ...editing, note: e.target.value })} placeholder="what this is, why it matters" /></div>
-            <div style={{ display: 'flex', gap: 8, marginTop: 14, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-              <button className="btn" onClick={() => setEditing(null)}>cancel</button>
-              <button className="btn btn--primary" onClick={() => save(editing)} disabled={!editing.title.trim()}>save draft</button>
-              {window.PublishButton && (() => {
-                const item = { ...editing, id: editing.id || ('s-' + Date.now()), added: editing.added || new Date().toISOString().slice(0,10), tags: editing.tags || [] };
-                const isLocalFile = item.url && /^data:|^blob:/.test(item.url);
-                return (
-                  <window.PublishButton scope="study" item={item} update={!!editing.id} small
-                    label={isLocalFile ? 'publish (needs URL)' : undefined}
-                    onDone={(r) => { if (r && r.ok && !r.queued) save(item); }} />
-                );
-              })()}
-            </div>
-          </div>
-        </div>
-      )}
-    </main>
   );
 }
 
@@ -2856,7 +2509,7 @@ function About() {
           <ul style={{ margin: '12px 0 0', paddingLeft: 18, lineHeight: 1.8, color: 'var(--ink-2)', fontFamily: 'var(--font-mono)', fontSize: 14 }}>
             <li>landing OpenVINO multimodal kernels for OvaSearch (GSoC '26)</li>
             <li>writing <i style={{ color: 'var(--accent)' }}>The quiet revolution in edge inference</i> series</li>
-            <li>maintaining the dispatch above and the study lab for my cohort</li>
+            <li>maintaining the dispatch above</li>
             <li>drawing two more familiars to round out the bestiary at twelve</li>
           </ul>
         </div>
@@ -2974,7 +2627,7 @@ function Contact() {
       <div className="shell">
         <div className="section__hd reveal">
           <div><div className="section__idx">CONTACT · always open</div><h2 className="section__title">Drop a line. Or two. <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)' }}>I read everything.</em></h2></div>
-          <p className="section__copy">For collaborations, commissions, recruiting, study-group invites, or to argue about C++ template instantiation rules. I reply within a week — usually a day.</p>
+          <p className="section__copy">For collaborations, commissions, recruiting, or to argue about C++ template instantiation rules. I reply within a week — usually a day.</p>
         </div>
         <div className="contact-grid">
           <form className="contact-form reveal" onSubmit={submit}>
@@ -2993,9 +2646,9 @@ function Contact() {
             </div>
             <div className="field">
               <label>topic</label>
-              <div className="study__pills" style={{ marginBottom: 0 }}>
-                {['work','collab','recruit','study','other'].map(t => (
-                  <button key={t} type="button" className="study__pill" aria-pressed={draft.topic===t} onClick={() => setDraft({ ...draft, topic: t })}>{t}</button>
+              <div className="pills" style={{ marginBottom: 0 }}>
+                {['work','collab','recruit','other'].map(t => (
+                  <button key={t} type="button" className="pill" aria-pressed={draft.topic===t} onClick={() => setDraft({ ...draft, topic: t })}>{t}</button>
                 ))}
               </div>
             </div>
@@ -3266,7 +2919,7 @@ function Cmdk({ open, onClose, posts, projects }) {
   useEffect(() => {if (open) setQ('');}, [open]);
   if (!open) return null;
   const items = [
-  ...['home', 'projects', 'blog', 'study', 'about', 'contact'].map((p) => ({ k: 'nav', l: 'go: ' + p, act: () => {nav(p);onClose();} })),
+  ...['home', 'projects', 'blog', 'about', 'contact'].map((p) => ({ k: 'nav', l: 'go: ' + p, act: () => {nav(p);onClose();} })),
   ...projects.map((p) => ({ k: 'project', l: 'project · ' + p.title, act: () => {nav('projects/' + p.id);onClose();} })),
   ...posts.map((p) => ({ k: 'post', l: 'post · ' + p.title, act: () => {nav('post/' + p.id);onClose();} }))].
   filter((i) => q === '' || i.l.toLowerCase().includes(q.toLowerCase()));
@@ -3375,7 +3028,6 @@ function App() {
     page = <PostReader post={p} onBack={() => nav('blog')} />;
   } else
   if (route.a === 'about') page = <About />;else
-  if (route.a === 'study') page = <StudyLab owner={owner} />;else
   if (route.a === 'contact') page = <Contact />;else
   if (route.a === 'console') {
     if (owner) page = <OwnerConsole onExit={() => nav('home')} />;
@@ -3398,7 +3050,6 @@ function App() {
             <li><a onClick={() => nav('home')} href="#/home">index</a></li>
             <li><a onClick={() => nav('projects')} href="#/projects">projects</a></li>
             <li><a onClick={() => nav('blog')} href="#/blog">dispatch</a></li>
-            <li><a onClick={() => nav('study')} href="#/study">study lab</a></li>
             <li><a onClick={() => nav('about')} href="#/about">about</a></li>
             <li><a onClick={() => nav('contact')} href="#/contact">contact</a></li>
           </ul>

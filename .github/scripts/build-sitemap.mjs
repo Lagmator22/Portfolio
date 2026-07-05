@@ -26,7 +26,6 @@ const urls = [
   { loc: SITE_URL + '/',            priority: '1.0', changefreq: 'weekly', lastmod: today },
   { loc: SITE_URL + '/#/projects',  priority: '0.9', changefreq: 'monthly', lastmod: today },
   { loc: SITE_URL + '/#/blog',      priority: '0.9', changefreq: 'weekly',  lastmod: today },
-  { loc: SITE_URL + '/#/study',     priority: '0.6', changefreq: 'weekly',  lastmod: today },
   { loc: SITE_URL + '/#/about',     priority: '0.7', changefreq: 'monthly', lastmod: today },
   { loc: SITE_URL + '/#/contact',   priority: '0.5', changefreq: 'yearly',  lastmod: today },
 ];

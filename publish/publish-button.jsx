@@ -10,7 +10,7 @@
      <PublishButton scope="posts" item={post} update={!!post.id} onDone={(r) => …} />
 
    PROPS
-     scope    'posts' | 'projects' | 'study'
+     scope    'posts' | 'projects'
      item     the object to publish (must have/get an `id`)
      update   bool — set true if editing an existing item
      label    optional override (default: 'publish')
@@ -41,7 +41,6 @@
     const mode = summary.cfg.mode;
     const fn = scope === 'posts' ? 'publishPost'
              : scope === 'projects' ? 'publishProject'
-             : scope === 'study' ? 'publishStudy'
              : null;
 
     const run = async (overrideMode) => {
