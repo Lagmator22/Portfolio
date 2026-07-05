@@ -1502,8 +1502,8 @@ window.__resolveAccent=_resolveAccent;
 <script>
 (function(){
   if (window.matchMedia('(hover: none)').matches) return;
-  const dot = document.createElement('div'); dot.className = 'cursor-dot'; document.body.appendChild(dot);
-  const ring = document.createElement('div'); ring.className = 'cursor-ring'; document.body.appendChild(ring);
+  const dot = document.createElement('div'); dot.className = 'cursor-dot'; dot.style.opacity = '0'; document.body.appendChild(dot);
+  const ring = document.createElement('div'); ring.className = 'cursor-ring'; ring.style.opacity = '0'; document.body.appendChild(ring);
   let tx=0,ty=0,rx=0,ry=0,vis=false;
   const INT='a,button,[role=button],.proj-card,.post-card,.hn-item,.contact-link,.hero__chip,.btn,.nav__link,.nav__tool,canvas[data-monster]';
 
@@ -1993,7 +1993,7 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
         <div className="shell">
           <div className="section__hd reveal">
             <div>
-              <div className="section__idx">04 / DISPATCH · {posts.length} ENTRIES</div>
+              <div className="section__idx">03 / DISPATCH · {posts.length} ENTRIES</div>
               <h2 className="section__title">Field notes. Mostly <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)' }}>opinionated</em>.</h2>
             </div>
             <p className="section__copy">Long-form on inference, markets, and tools. Categories: ai, quant, research, hidden gems.</p>
@@ -2391,7 +2391,7 @@ function About() {
           <div className="kicker">currently · {new Date().toISOString().slice(0,10)}</div>
           <ul style={{ margin: '12px 0 0', paddingLeft: 18, lineHeight: 1.8, color: 'var(--ink-2)', fontFamily: 'var(--font-mono)', fontSize: 14 }}>
             <li>landing OpenVINO multimodal kernels for OvaSearch (GSoC '26)</li>
-            <li>writing <i style={{ color: 'var(--accent)' }}>The quiet revolution in edge inference</i> series</li>
+            <li>writing dispatch notes from the GSoC work as it lands</li>
             <li>maintaining the dispatch above</li>
             <li>drawing two more familiars to round out the bestiary at twelve</li>
           </ul>
