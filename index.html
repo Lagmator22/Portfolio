@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-mode="dark" data-accent="indigo" data-monsters="on" data-cursor="comet" data-density="comfortable">
+<html lang="en" data-mode="dark" data-accent="indigo" data-monsters="on" data-cursor="comet">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -27,10 +27,8 @@
  *   monsters   true → pixel familiars render; false → canvas bails early.
  *   blogFont   "source-serif" | "georgia" | "garamond" | "times"
  *   motion     "full" | "subtle" | "none"      (drives the --motion CSS var)
- *   density    "compact" | "comfortable" | "roomy"
  *   cursor     "comet" | "pixel" | "nova" | "ribbon" | "spark" | "blade"
  *              | "terminal" | "crosshair" | "off"
- *   scrollFx   Reserved — currently unused, left in for forward-compat.
  *   ownerHash  SHA-256 hex of the owner password. Compared client-side; the
  *              plaintext password never touches the source.
  *
@@ -46,9 +44,7 @@ const TWEAK_DEFAULTS = {
   "monsters": true,
   "blogFont": "times",
   "motion": "full",
-  "density": "roomy",
   "cursor": "crosshair",
-  "scrollFx": true,
   "ownerHash": "0c1a27670aecc48ee49e582446a65d19a9122a849b4ce26f3160c8dc29f17724"
 };
 window.TWEAK_DEFAULTS = TWEAK_DEFAULTS;
@@ -72,7 +68,6 @@ window.TWEAK_DEFAULTS = TWEAK_DEFAULTS;
  *  11. MODAL/TWEAKS  — backdrop + tweaks panel
  *  12. FOOTER        — four-column with brand
  *  13. HERO REFINEMENTS — marquee, status, monster card
- *  14. CURSOR LAB    — 9-tile picker on home
  *  16. ABOUT         — stack columns
  *  17. SCROLL UX     — progress bar, hint, section index
  *  18. ANIMATIONS    — reveals, stagger, glow halos
@@ -117,7 +112,7 @@ window.TWEAK_DEFAULTS = TWEAK_DEFAULTS;
   --ease-out:cubic-bezier(0.22,1,0.36,1);
   --ease-soft:cubic-bezier(0.65,0,0.35,1);
   --dur-fast:140ms; --dur-base:280ms; --dur-slow:560ms;
-  --motion:1; --density:1;
+  --motion:1;
 
   --content-w:1240px; --reading-w:680px;
 
@@ -836,36 +831,6 @@ html[data-cursor]:not([data-cursor="off"]) *{cursor:none!important}
 .stack-strip__row span{animation:marq 50s linear infinite;flex-shrink:0;display:flex;align-items:center;gap:48px}
 .stack-strip__row b{color:var(--accent);font-weight:500}
 .stack-strip__row em{font-style:normal;color:var(--ink-4)}
-
-/* ================================================================
-   CURSOR LAB SECTION
-================================================================ */
-.cursor-lab{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-}
-@media (max-width:780px){.cursor-lab{grid-template-columns:repeat(2,1fr)}}
-.cursor-lab__tile{
-  position:relative;padding:18px;min-height:120px;
-  border:1px solid var(--line);border-radius:12px;background:var(--bg-raised);
-  display:flex;flex-direction:column;justify-content:space-between;gap:8px;
-  transition:all var(--dur-fast) var(--ease-out);overflow:hidden;
-}
-.cursor-lab__tile:hover{border-color:color-mix(in oklch,var(--accent) 50%,var(--line));transform:translateY(-2px);box-shadow:0 12px 30px var(--accent-glow)}
-.cursor-lab__tile[aria-pressed="true"]{
-  border-color:var(--accent);background:color-mix(in oklch,var(--accent) 8%,var(--bg-raised));
-  box-shadow:0 0 0 1px var(--accent), 0 18px 40px var(--accent-glow);
-}
-.cursor-lab__name{
-  font-family:var(--font-display);font-size:18px;font-weight:600;letter-spacing:-0.01em;
-  display:flex;align-items:center;gap:10px;padding-right:52px;
-}
-.cursor-lab__name small{font-family:var(--font-mono);font-size:10px;color:var(--ink-4);letter-spacing:.12em;text-transform:uppercase;margin-left:auto;white-space:nowrap}
-.cursor-lab__desc{font-size:12px;color:var(--ink-3);line-height:1.45}
-.cursor-lab__glyph{
-  position:absolute;right:14px;top:14px;width:36px;height:36px;
-  display:grid;place-items:center;color:var(--accent);opacity:.7;
-}
-.cursor-lab__tile[aria-pressed="true"] .cursor-lab__glyph{opacity:1}
 
 /* ================================================================
    SECTION DIVIDERS — numbered tickets
@@ -1796,7 +1761,6 @@ window.__observeReveal = (root=document)=>root.querySelectorAll('.reveal:not(.in
  *   Home        → hero / projects / dispatch
  *   ProjectsPage / ProjectPage   → grid + detail
  *   Blog / PostReader / PostEditor / renderMarkdown
- *   CursorLab   → live cursor picker
  *   About / Contact
  *   TweaksPanel / Cmdk          → floating controls
  *   App         → root, owns route + custom-content state
@@ -1855,9 +1819,7 @@ function applyTweaks(t) {
   r.setAttribute('data-accent', t.accent);
   r.setAttribute('data-monsters', t.monsters ? 'on' : 'off');
   r.setAttribute('data-cursor', t.cursor || 'comet');
-  r.setAttribute('data-density', t.density);
   r.style.setProperty('--motion', t.motion === 'none' ? '0' : t.motion === 'subtle' ? '.5' : '1');
-  r.style.setProperty('--density', t.density === 'compact' ? '.85' : t.density === 'roomy' ? '1.15' : '1');
   const fonts = { 'source-serif': "'Source Serif 4',Georgia,serif", 'georgia': "Georgia,serif", 'garamond': "'EB Garamond',Georgia,serif", 'times': "'Times New Roman',serif" };
   r.style.setProperty('--font-serif', fonts[t.blogFont] || fonts['source-serif']);
 }
@@ -1932,7 +1894,6 @@ function Monster({ id, size = 96 }) {
 const HOME_SECTIONS = [
   { id: 'hero',     label: 'index' },
   { id: 'work',     label: 'work' },
-  { id: 'cursors',  label: 'cursors' },
   { id: 'dispatch', label: 'dispatch' }
 ];
 function Home({ posts, projects, onPost, onProject, setTweak }) {
@@ -2052,17 +2013,6 @@ function Home({ posts, projects, onPost, onProject, setTweak }) {
         </div>
       </section>
 
-      {/* CURSOR LAB — click locks the cursor in and persists it via the
-          tweaks store. Hover used to swap cursors live, but that triggered
-          accidental swaps mid-scroll (any pointer drift over a tile).
-          Click-only locks the choice; mouse-pass-over is now inert. */}
-      <CursorLab tweaks={window.__tweaksGet?.() || {}} onPick={(v)=>{
-        try{parent.postMessage({type:'__edit_mode_set_keys',edits:{cursor:v}},'*');}catch{}
-        document.documentElement.setAttribute('data-cursor',v);
-        setTweak?.('cursor', v);
-        const ev=new CustomEvent('cursorpicked',{detail:v});window.dispatchEvent(ev);
-      }} />
-
       {/* DISPATCH PREVIEW */}
       <section className="section section--tape" data-section="dispatch">
         <div className="shell">
@@ -2129,54 +2079,6 @@ function SectionIndex({ sections }) {
           }} />
       ))}
     </div>
-  );
-}
-
-/* ============= CURSOR LAB ============= */
-const CURSORS = [
-  { v: 'comet',     name: 'Comet',     desc: 'A trailing tail of accent dust. The default vibe.',     glyph: '◐' },
-  { v: 'pixel',     name: 'Pixel',     desc: 'A 4-px snap-to-grid block. Falls like Tetris.',          glyph: '▣' },
-  { v: 'nova',      name: 'Nova',      desc: 'A plus-sign reticle that bursts on click.',              glyph: '✦' },
-  { v: 'ribbon',    name: 'Ribbon',    desc: 'A horizontal pill that banks into the direction you move.', glyph: '〜' },
-  { v: 'spark',     name: 'Spark',     desc: 'A single hot point with falling sparks under gravity.',  glyph: '✺' },
-  { v: 'blade',     name: 'Blade',     desc: 'A slim vertical edge with a slash arc behind every dash.', glyph: '⟋' },
-  { v: 'terminal',  name: 'Terminal',  desc: 'A blinking text caret. Drops glyphs as you move.',       glyph: '▌' },
-  { v: 'crosshair', name: 'Crosshair', desc: 'A targeting reticle with corner brackets on click.',     glyph: '⊕' },
-  { v: 'off',       name: 'Off',       desc: 'System cursor. Boring, but it works.',                   glyph: '↖' }
-];
-function CursorLab({ onPick }) {
-  const [active, setActive] = useState(() => document.documentElement.getAttribute('data-cursor') || 'comet');
-  useEffect(() => {
-    const fn = () => setActive(document.documentElement.getAttribute('data-cursor') || 'comet');
-    const obs = new MutationObserver(fn);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-cursor'] });
-    return () => obs.disconnect();
-  }, []);
-  return (
-    <section className="section section--tape" data-section="cursors">
-      <div className="shell">
-        <div className="section__hd reveal">
-          <div>
-            <div className="section__idx">03 / CURSOR LAB</div>
-            <h2 className="section__title">Pick a cursor. <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)' }}>It changes shape</em>.</h2>
-          </div>
-          <p className="section__copy">Every flare ships with its own silhouette and its own particle physics. Click a tile to lock yours in.</p>
-        </div>
-        <div className="cursor-lab reveal-stagger">
-          {CURSORS.map((c, i) => (
-            <button key={c.v} className="cursor-lab__tile reveal" aria-pressed={active === c.v} style={{ '--i': i }}
-              onClick={() => onPick(c.v)}>
-              <span className="cursor-lab__glyph">{c.glyph}</span>
-              <div className="cursor-lab__name">{c.name}<small>{active === c.v ? 'active' : c.v}</small></div>
-              <div className="cursor-lab__desc">{c.desc}</div>
-            </button>
-          ))}
-        </div>
-        <p style={{ marginTop: 16, fontSize: 12, color: 'var(--ink-4)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-          tap a tile to lock it in · or open theme from the nav for the full panel
-        </p>
-      </div>
-    </section>
   );
 }
 
@@ -2776,19 +2678,12 @@ function TweaksPanel({ open, onClose, tweaks, setTweak }) {
         <div className="tw-row"><div className="tw-row__lbl">motion</div>
           <Seg k="motion" opts={[{ v: 'full', l: 'full' }, { v: 'subtle', l: 'subtle' }, { v: 'none', l: 'none' }]} />
         </div>
-        <div className="tw-row"><div className="tw-row__lbl">density</div>
-          <Seg k="density" opts={[{ v: 'compact', l: 'compact' }, { v: 'comfortable', l: 'comfy' }, { v: 'roomy', l: 'roomy' }]} />
-        </div>
         <div className="tw-row"><div className="tw-row__lbl">blog font</div>
           <Seg k="blogFont" opts={[{ v: 'source-serif', l: 'serif' }, { v: 'georgia', l: 'georgia' }, { v: 'garamond', l: 'garamond' }, { v: 'times', l: 'times' }]} />
         </div>
         <div className="tw-toggle">
           <span style={{ color: 'var(--ink-3)' }}>monsters</span>
           <button className="tw-switch" aria-pressed={tweaks.monsters} onClick={() => setTweak('monsters', !tweaks.monsters)} />
-        </div>
-        <div className="tw-toggle">
-          <span style={{ color: 'var(--ink-3)' }}>scroll fx</span>
-          <button className="tw-switch" aria-pressed={tweaks.scrollFx} onClick={() => setTweak('scrollFx', !tweaks.scrollFx)} />
         </div>
       </div>
     </div>);
