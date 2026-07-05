@@ -38,7 +38,7 @@ jobs:
 
       - name: Build sitemap.xml
         env:
-          SITE_URL: ${{ vars.SITE_URL || 'https://lagmator22.github.io/portfolio-v2' }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://lagmator22.github.io/Portfolio' }}
         run: node .github/scripts/build-sitemap.mjs
 
       - name: Build og.png
