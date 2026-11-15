@@ -457,12 +457,18 @@ a.row:hover > .mono { color: var(--ink); }
   position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column;
   background: #08090a; color: #d7dad3; font-family: var(--mono); font-size: 14px; line-height: 1.6;
   --mint: #7cf5c4; color-scheme: dark;
-  animation: tui-in 0.25s steps(4);
+  /* opens and closes the same way: site.js toggles .is-open, then [hidden] */
+  opacity: 0; transform: translateY(18px) scale(0.985);
+  transition: opacity 0.36s var(--ease), transform 0.46s var(--ease);
 }
+.tui.is-open { opacity: 1; transform: none; }
 .tui[hidden] { display: none; }
-@keyframes tui-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+/* the page steps back while the terminal is up */
+body > header, body > main, body > footer { transition: opacity 0.4s var(--ease), transform 0.5s var(--ease); }
+.tui-open body > header, .tui-open body > main, .tui-open body > footer { opacity: 0; transform: scale(0.985); }
 .tui__bar { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 16px 0 20px; border-bottom: 1px solid #23262a; color: #8b9097; }
 .tui__close { padding: 7px 12px; font: inherit; color: #d7dad3; background: none; border: 1px solid #2c2f34; cursor: pointer; }
+.tui__close, .tui__chips button { transition: color 0.25s var(--ease), background-color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.2s var(--ease); }
 .tui__close:hover { color: #08090a; background: #d7dad3; }
 .tui__screen { flex: 1; overflow-y: auto; padding: 24px 20px 12px; }
 .tui__out, .tui__line { max-width: 940px; margin: 0 auto; }
@@ -484,6 +490,26 @@ a.row:hover > .mono { color: var(--ink); }
 .tui__sprites { display: flex; flex-wrap: wrap; gap: 16px; padding: 4px 0 14px; --px: 5px; }
 .tui :focus-visible { outline-color: var(--mint); }
 
+/* ---------- interaction: one feel for everything you can press ---------- */
+/* hover eases in, a press dips, and focus looks the same everywhere */
+.link, .tui-btn, .chip, .theme-btn, .brand, .card, .site-foot a { transition: color 0.25s var(--ease), background-color 0.25s var(--ease), border-color 0.25s var(--ease), text-decoration-color 0.25s var(--ease), transform 0.2s var(--ease); }
+.link:active, .tui-btn:active, .chip:active, .theme-btn:active, .card:active, .tui__close:active, .tui__chips button:active { transform: scale(0.96); }
+.biglink:active > span, a.row:active .row__main { transform: translateX(6px); }
+.theme-btn:hover svg { transform: rotate(24deg); }
+:root[data-theme="dark"] .theme-btn:hover svg { transform: rotate(204deg); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme-btn:hover svg { transform: rotate(204deg); } }
+/* nav: an underline draws in from the left */
+.site-nav a { position: relative; }
+.site-nav a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 9px; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease);
+}
+.site-nav a:hover::after, .site-nav a[aria-current]::after { transform: scaleX(1); }
+/* rows slide a little toward the pointer, like the big contact links */
+.row__main { transition: transform 0.45s var(--ease); }
+a.row:hover .row__main { transform: translateX(8px); }
+.lineup a .sprite, .project .sprite { transition: filter 0.3s; }
+
 /* ---------- scroll reveal ---------- */
 .js [data-reveal] { opacity: 0; transform: translateY(18px); }
 .js [data-reveal].is-in {
@@ -492,8 +518,29 @@ a.row:hover > .mono { color: var(--ink); }
   transition-delay: var(--d, 0s);
 }
 
-/* theme switch: the new theme opens as a circle from the button (site.js) */
-:root.theming::view-transition-old(root), :root.theming::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+/* the parts of a project, the rows of a list and the contact links arrive in turn */
+.js .project > div > *, .js .rows[data-reveal] > *, .js [data-reveal] > .biglink { opacity: 0; transform: translateY(12px); }
+.js .project.is-in > div > *, .js .rows[data-reveal].is-in > *, .js [data-reveal].is-in > .biglink {
+  opacity: 1; transform: none;
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: calc(0.08s + var(--k, 0) * 0.07s);
+}
+.js .project > div > :nth-child(2), .js .rows > :nth-child(2), .js .biglink:nth-child(2) { --k: 1; }
+.js .project > div > :nth-child(3), .js .rows > :nth-child(3), .js .biglink:nth-child(3) { --k: 2; }
+.js .project > div > :nth-child(4), .js .rows > :nth-child(4), .js .biglink:nth-child(4) { --k: 3; }
+.js .project > div > :nth-child(5), .js .rows > :nth-child(5), .js .biglink:nth-child(5) { --k: 4; }
+.js .project > div > :nth-child(6), .js .rows > :nth-child(6) { --k: 5; }
+.js .project > div > :nth-child(7), .js .rows > :nth-child(7) { --k: 6; }
+/* the header settles in on load */
+@keyframes settle { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.js .site-head__in { animation: settle 0.8s var(--ease) both; }
+/* the hero drifts and dims as it scrolls away; --hp (0 to 1) comes from site.js */
+.hero { transform: translateY(calc(var(--hp, 0) * 48px)); opacity: calc(1 - var(--hp, 0) * 0.75); }
+
+/* theme switch: the two themes cross-fade slowly (site.js) */
+:root.theming::view-transition-old(root), :root.theming::view-transition-new(root) { animation-duration: 0.7s; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+/* browsers without view transitions fade the colours instead */
+:root.theming-css *, :root.theming-css *::before, :root.theming-css *::after { transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, fill 0.7s ease, stroke 0.7s ease !important; }
 
 /* ---------- small screens ---------- */
 @media (max-width: 960px) {
@@ -543,7 +590,8 @@ a.row:hover > .mono { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .js .word > span, .js [data-reveal], .js .journey li, .js .cells i { opacity: 1; transform: none; }
+  .js .word > span, .js [data-reveal], .js .journey li, .js .cells i, .js .project > div > *, .js .rows[data-reveal] > *, .js [data-reveal] > .biglink { opacity: 1; transform: none; }
+  .hero { transform: none; opacity: 1; }
   .js .lineup__stand::after, .js .bar i { transform: none; }
   @view-transition { navigation: none; }
 }

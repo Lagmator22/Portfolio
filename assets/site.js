@@ -312,6 +312,40 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
   setTimeout(start, 500);
 
+  /* Plain numbers in a project's facts count up when the project scrolls in
+     ("6 ms", "30", "4.8 s"). Anything else ("525/525") is left as written. */
+  $$('.facts dt').forEach(function (dt) {
+    var m = dt.textContent.trim().match(/^(~)?(\d[\d,]*(?:\.\d+)?)(\s?[A-Za-z%]+)?$/);
+    if (!m) return;
+    dt.dataset.count = m[2].replace(/,/g, '');
+    dt.dataset.decimals = (m[2].split('.')[1] || '').length;
+    if (m[1]) dt.dataset.prefix = m[1];
+    if (m[3]) dt.dataset.suffix = m[3];
+  });
+
+  /* Once the cast has assembled, the sprites hop one after another, once. */
+  var cast = $$('.lineup canvas[data-sprite]');
+  if (cast.length && !reduceMotion) {
+    setTimeout(function () {
+      cast.forEach(function (c, i) { setTimeout(function () { if (c._sprite) c._sprite.hop(); }, i * 110); });
+    }, 3000);
+  }
+
+  /* The hero drifts and dims a little as it scrolls away. */
+  var hero = $('.hero');
+  if (hero && !reduceMotion) {
+    var heroTick = false;
+    var driftHero = function () {
+      heroTick = false;
+      var p = Math.max(0, Math.min(1, window.scrollY / Math.max(1, hero.offsetHeight)));
+      hero.style.setProperty('--hp', p.toFixed(3));
+    };
+    window.addEventListener('scroll', function () {
+      if (!heroTick) { heroTick = true; requestAnimationFrame(driftHero); }
+    }, { passive: true });
+    driftHero();
+  }
+
   /* ============================================================
    * Journey: entries light up as the page scrolls past them, the
    * line fills behind them, and the chips filter by kind.
@@ -400,8 +434,7 @@
 
   /* ============================================================
    * Theme: follows the system until the button is used, then
-   * remembers the choice. The new theme opens as a circle from
-   * wherever the switch happened.
+   * remembers the choice. The two themes cross-fade.
    * ============================================================ */
   var themeBtn = $('.theme-btn');
   function isDark() {
@@ -409,29 +442,27 @@
     return set ? set === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
   function labelTheme() { if (themeBtn) themeBtn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme'); }
-  function setTheme(next, x, y) {
+  function setTheme(next) {
     function apply() {
       root.setAttribute('data-theme', next);
       try { localStorage.setItem('theme', next); } catch (e) {}
       labelTheme();
     }
-    if (!document.startViewTransition || reduceMotion) { apply(); return; }
-    var r = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
-    root.classList.add('theming');
-    var vt = document.startViewTransition(apply);
-    vt.ready.then(function () {
-      root.animate(
-        { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + r + 'px at ' + x + 'px ' + y + 'px)'] },
-        { duration: 700, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', pseudoElement: '::view-transition-new(root)' }
-      );
-    }).catch(function () {});
-    vt.finished.then(function () { root.classList.remove('theming'); }, function () { root.classList.remove('theming'); });
+    if (reduceMotion) { apply(); return; }
+    /* A slow cross-fade between the two themes. */
+    if (document.startViewTransition) {
+      root.classList.add('theming');
+      var vt = document.startViewTransition(apply);
+      var end = function () { root.classList.remove('theming'); };
+      vt.finished.then(end, end);
+    } else {
+      root.classList.add('theming-css');
+      apply();
+      setTimeout(function () { root.classList.remove('theming-css'); }, 750);
+    }
   }
   if (themeBtn) {
-    themeBtn.addEventListener('click', function () {
-      var b = themeBtn.getBoundingClientRect();
-      setTheme(isDark() ? 'light' : 'dark', b.left + b.width / 2, b.top + b.height / 2);
-    });
+    themeBtn.addEventListener('click', function () { setTheme(isDark() ? 'light' : 'dark'); });
     labelTheme();
   }
 
@@ -688,7 +719,7 @@
       }],
       theme: ['switch light and dark: theme dark', function (args) {
         var next = args[0] === 'light' || args[0] === 'dark' ? args[0] : (isDark() ? 'light' : 'dark');
-        setTheme(next, window.innerWidth / 2, window.innerHeight / 2);
+        setTheme(next);
         line('Site theme: ' + next + '.');
       }],
       clear: ['clear the screen', function () { out.textContent = ''; }],
@@ -780,25 +811,29 @@
     return { box: box, input: input, greet: greet, greeted: false };
   }
 
-  var lastFocus = null;
+  var lastFocus = null, closeTimer = 0;
   function openTui() {
     if (!DATA) return;
     if (!tui) tui = buildTui();
-    if (!tui.box.hidden) return;
+    clearTimeout(closeTimer);
+    if (!tui.box.hidden && tui.box.classList.contains('is-open')) return;
     lastFocus = document.activeElement;
     tui.box.hidden = false;
+    void tui.box.offsetWidth;                 // let the closed state paint, so the open one animates
+    tui.box.classList.add('is-open');
     root.classList.add('tui-open');
     $$('body > header, body > main, body > footer').forEach(function (n) { n.inert = true; });
     if (!tui.greeted) { tui.greeted = true; tui.greet(); }
     tui.input.focus();
   }
   function closeTui() {
-    if (!tui || tui.box.hidden) return;
-    tui.box.hidden = true;
+    if (!tui || tui.box.hidden || !tui.box.classList.contains('is-open')) return;
+    tui.box.classList.remove('is-open');      // plays the opening animation in reverse
     root.classList.remove('tui-open');
     $$('body > header, body > main, body > footer').forEach(function (n) { n.inert = false; });
     if (location.hash === '#terminal') history.replaceState(null, '', location.pathname);
     if (lastFocus && lastFocus.focus) lastFocus.focus();
+    closeTimer = setTimeout(function () { tui.box.hidden = true; }, reduceMotion ? 0 : 480);
   }
   $$('[data-tui-open]').forEach(function (b) { b.addEventListener('click', openTui); });
   document.addEventListener('keydown', function (e) {
