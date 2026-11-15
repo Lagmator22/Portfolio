@@ -1,14 +1,14 @@
 name: Deploy to GitHub Pages
 
-# Build-less Pages deploy. Just publishes the repo root as-is.
-# The Owner Console writes data/*.json on every publish; the
-# next push triggers a redeploy and visitors see the change.
+# Builds the site with scripts/build.mjs (no dependencies) and publishes
+# only the generated _site folder. Nothing else in the repo is served.
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+# Least privilege: read the code, write the Pages deployment, nothing else.
 permissions:
   contents: read
   pages: write
@@ -26,19 +26,23 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # Actions are pinned to full commit SHAs so a moved tag cannot change what runs.
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Build
+        run: node scripts/build.mjs
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
-          # Whole repo, no build step. .nojekyll is already in the repo so
-          # Pages won't try to run Jekyll on it.
-          path: '.'
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

@@ -1,0 +1,65 @@
+<!--
+  Home page body. scripts/build.mjs wraps this in the page shell and fills
+  the {{markers}} from the files in content/.
+  Keep this page short: OVAT, Journey and Writing have their own pages.
+-->
+<section class="hero wrap" id="top">
+  <p class="status mono" data-reveal><i></i><span data-decode>{{status}}</span></p>
+  <h1 data-words>Systems programmer working on local AI inference.</h1>
+  <p class="hero__lede" data-reveal data-delay="350"><b>Google Summer of Code 2026</b> contributor at <b>Intel OpenVINO</b>, where I built and shipped <a href="{{rel}}ovat/">OVAT</a>. C++ first, Python where it fits. Computer Engineering at Thapar Institute, class of 2028.</p>
+  <div class="links" data-reveal data-delay="450">
+    {{links}}
+  </div>
+
+  <nav class="lineup" aria-label="Projects">
+    {{lineup}}
+  </nav>
+</section>
+
+<section class="section wrap" id="work">
+  <div class="section__head" data-reveal>
+    <h2>Work</h2>
+    <p>Six projects, all from 2026.</p>
+  </div>
+  <div>
+    {{projects}}
+    <h3 class="subhead" data-reveal>Also</h3>
+    <div class="rows" data-reveal>
+      {{also}}
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" id="open-source">
+  <div class="section__head" data-reveal>
+    <h2>Open source</h2>
+    <p>Merged into Intel OpenVINO.</p>
+  </div>
+  <div>
+    <div class="rows" data-reveal>
+      {{oss_top}}
+    </div>
+    <a class="link more" href="{{rel}}journey/#open-source">All contributions {{arrow}}</a>
+  </div>
+</section>
+
+<section class="section wrap" id="about">
+  <div class="section__head" data-reveal>
+    <h2>About</h2>
+  </div>
+  <div class="about" data-reveal>
+    <p>I'm Gurman, a systems programmer and AI developer in Delhi. I like working close to the hardware: C++, memory, and getting models to run fast on ordinary machines.</p>
+    <p>Most of what I build runs locally. Agents, retrieval and speech-to-text that work without a cloud account.</p>
+    <a class="link more" href="{{rel}}journey/">Experience, honors and skills {{arrow}}</a>
+  </div>
+</section>
+
+<section class="section wrap" id="contact">
+  <div class="section__head" data-reveal>
+    <h2>Contact</h2>
+    <p aria-live="polite" data-email-status>Email is fastest.</p>
+  </div>
+  <div data-reveal>
+    {{biglinks}}
+  </div>
+</section>

@@ -1,0 +1,75 @@
+<!--
+  The OVAT page. Hand-written; edit the text and numbers here.
+-->
+<section class="flag">
+  <div class="wrap">
+    <p class="flag__kicker mono" data-reveal><i></i><span data-decode>Flagship project · Google Summer of Code 2026 · Intel OpenVINO</span></p>
+    <div class="flag__title" data-reveal>
+      <canvas class="sprite" width="16" height="16" data-sprite="ovat" role="img" aria-label="OVAT sprite: a robot"></canvas>
+      <h1>OVAT</h1>
+    </div>
+    <p class="flag__tag" data-reveal>One YAML file and one command give you a tool-calling AI agent on an Intel AI PC.</p>
+
+    <div class="flag__grid">
+      <div data-reveal>
+        <p class="flag__desc">OVAT, the OpenVINO Agentic Toolkit, replaces the client, schema and loop code that every agent project rewrites. You describe the model, the tools and the agent in workflow.yml. OVAT validates the file, wires everything to OpenVINO Model Server and runs the agent on CPU, GPU or NPU. No API keys, and nothing leaves the machine.</p>
+        <ul class="flag__list">
+          <li><b>Four engines, one config</b>A native loop, LangChain ReAct, LlamaIndex and the OpenAI Agents SDK sit behind one interface, so the same file runs on any of them.</li>
+          <li><b>Speaks the agent protocols</b>An MCP client and server, an Agent2Agent server, and a terminal agent with subagents and permission prompts.</li>
+          <li><b>Routes across devices</b>Serves 0.8B to 8B models over OpenVINO Model Server. Tool-calling agents also run on the NPU.</li>
+          <li><b>Diagnosis built in</b>doctor, trace, telemetry and bench commands. I used them to trace unbounded memory growth (KV cache from 0.62 to 3.6 GB in about nine minutes) to a missing reply cap.</li>
+          <li><b>Tested like a product</b>About 1,500 tests that run without a model server, and a rule that every fix ships with a test that fails without it.</li>
+        </ul>
+        <div class="links">
+          <a class="link" href="https://github.com/Lagmator22/ovat" target="_blank" rel="noopener noreferrer">GitHub {{arrow}}</a>
+          <a class="link" href="https://pypi.org/project/ovat/" target="_blank" rel="noopener noreferrer">PyPI {{arrow}}</a>
+          <a class="link" href="https://lagmator22.github.io/ovat-navigate/" target="_blank" rel="noopener noreferrer">Docs {{arrow}}</a>
+        </div>
+        <p class="flag__mentors mono">Mentors: Freddy Chiu, Director of AI Software, Intel · Ravi Panchumarthy, Ph.D., Intel</p>
+      </div>
+
+      <div>
+        <pre class="term" data-term data-reveal aria-label="OVAT quickstart commands">$ pip install ovat
+$ ovat setup                # install the model server, once
+$ ovat init workflow.yml    # write a starter config
+$ ovat serve workflow.yml   # start the model server
+$ ovat run workflow.yml --input "what do my notes say about Q3?"</pre>
+
+        <div class="metric" data-reveal>
+          <p class="metric__label">Same question, two devices</p>
+          <p class="metric__nums"><b data-count="11" data-suffix=" s">11 s</b><span>on an Arc GPU, against</span><b data-count="19" data-suffix=" s">19 s</b><span>on CPU</span></p>
+          <div class="bars">
+            <span>GPU</span><div class="bar bar--win" data-v="0.579"><i></i></div>
+            <span>CPU</span><div class="bar" data-v="1"><i></i></div>
+          </div>
+        </div>
+
+        <div class="metric" data-reveal>
+          <p class="metric__label">Tool-call accuracy, after benchmarking two model-server releases and pinning the winner</p>
+          <p class="metric__nums"><b>42</b><span>of 60, up to</span><b data-count="56">56</b><span>of 60</span></p>
+          <div class="cells" data-cells="60" data-base="42" data-gain="14" aria-hidden="true"></div>
+        </div>
+
+        <div class="metric" data-reveal>
+          <p class="metric__label">Peak memory in the same benchmark</p>
+          <p class="metric__nums"><b>17.3 GB</b><span>down to</span><b data-count="4.9" data-decimals="1" data-suffix=" GB">4.9 GB</b></p>
+          <div class="bars">
+            <span>before</span><div class="bar" data-v="1"><i></i></div>
+            <span>after</span><div class="bar bar--win" data-v="0.283"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section__head" data-reveal>
+    <h2>Background</h2>
+  </div>
+  <div class="about" data-reveal>
+    <p>OVAT was my Google Summer of Code 2026 project with Intel OpenVINO: a large project over twelve weeks, from May to September 2026.</p>
+    <p>It grew out of OvaSearch, a C++ retrieval engine I had built on OpenVINO earlier that year, which became the prior art for the proposal.</p>
+    <a class="link more" href="{{rel}}#work">All work {{arrow}}</a>
+  </div>
+</section>

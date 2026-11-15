@@ -4,3 +4,5 @@ private-notes/
 
 # macOS noise
 .DS_Store
+_site/
+.playwright-mcp/

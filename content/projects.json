@@ -1,0 +1,212 @@
+[
+  {
+    "id": "ovat",
+    "name": "OVAT",
+    "sprite": "ovat",
+    "flagship": true,
+    "context": "Google Summer of Code 2026, Intel OpenVINO",
+    "tagline": "One YAML file and one command give you a tool-calling AI agent on an Intel AI PC.",
+    "description": "The OpenVINO Agentic Toolkit. Describe the model, the tools and the agent in workflow.yml. OVAT validates it, wires everything to OpenVINO Model Server and runs the agent on CPU, GPU or NPU, with no API keys and nothing leaving the machine.",
+    "facts": [
+      {
+        "value": "30",
+        "label": "releases on PyPI"
+      },
+      {
+        "value": "11 s vs 19 s",
+        "label": "same question, Arc GPU vs CPU"
+      },
+      {
+        "value": "42/60 to 56/60",
+        "label": "tool-call accuracy after benchmarking model-server releases"
+      },
+      {
+        "value": "~1,500",
+        "label": "tests that run without a model server"
+      },
+      {
+        "value": "17.3 GB to 4.9 GB",
+        "label": "peak memory"
+      }
+    ],
+    "stack": "Python · OpenVINO · OVMS · MCP · Agent2Agent",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lagmator22/ovat"
+      },
+      {
+        "label": "PyPI",
+        "url": "https://pypi.org/project/ovat/"
+      },
+      {
+        "label": "Docs",
+        "url": "https://lagmator22.github.io/ovat-navigate/"
+      }
+    ],
+    "page": "ovat/"
+  },
+  {
+    "id": "ovasearch",
+    "name": "OvaSearch",
+    "sprite": "ovasearch",
+    "tagline": "A multimodal RAG and code retrieval engine in native C++.",
+    "description": "A single binary with no Python runtime: Qwen2-VL for vision, bge-small embeddings, Llama-3.2-3B INT4 and a USearch HNSW index, all on OpenVINO. At the Samsung PRISM GenAI Hackathon 2026, in a team of four, a git-revision-aware code search CLI built on it raised NDCG@10 on CoIR AppsRetrieval about 9x, on CPU only.",
+    "facts": [
+      {
+        "value": "6 ms",
+        "label": "median retrieval, M2 Pro CPU"
+      },
+      {
+        "value": "4.8 s",
+        "label": "median end to end, 100 queries, 0 crashes"
+      },
+      {
+        "value": "0.056 to 0.514",
+        "label": "NDCG@10 on AppsRetrieval"
+      }
+    ],
+    "stack": "C++ · OpenVINO GenAI · USearch · Python · MTEB",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lagmator22/OvaSearch"
+      }
+    ]
+  },
+  {
+    "id": "lisper",
+    "name": "Lisper",
+    "sprite": "lisper",
+    "tagline": "A local speech-to-text engine built on whisper.cpp.",
+    "description": "A cross-platform transcription engine for audio and video with drag and drop, live microphone, batch and folder-watch modes. It exports TXT, SRT and timestamped JSON for downstream RAG pipelines, and the audio never leaves the device.",
+    "facts": [],
+    "stack": "C++ · whisper.cpp · ImGui · SDL2",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lagmator22/Lisper"
+      }
+    ]
+  },
+  {
+    "id": "vaultagent",
+    "name": "VaultAgent",
+    "sprite": "vaultagent",
+    "tagline": "Ask questions across your personal files without uploading them.",
+    "description": "Indexes personal files on the device and sends only redacted context to cloud models, through a two-stage PII gate: Presidio first, then a local Gemma judge. Every outbound payload is audited. Built for OpenAI Build Week 2026.",
+    "facts": [
+      {
+        "value": "525/525",
+        "label": "clean on a hard-case stress corpus"
+      },
+      {
+        "value": "0.533 vs 0.213",
+        "label": "contextual-PII recall vs Presidio alone"
+      },
+      {
+        "value": "0 leaks",
+        "label": "across 1,786 audited fields, 8 planted canaries"
+      }
+    ],
+    "stack": "Python · SQLite FTS5 · sqlite-vec · Presidio · MCP",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lagmator22/vaultagent"
+      }
+    ]
+  },
+  {
+    "id": "parable",
+    "name": "Parable",
+    "sprite": "parable",
+    "tagline": "A public record that AI trading bots cannot edit.",
+    "description": "A vault contract registers every bot before it can trade and records how it ended, so the bots that lost stay listed next to the ones that got lucky. I built v1 solo, in person, at ETHGlobal Mumbai 2026. v2, Parable Trade, adds a marketplace where buyers re-run a bot's backtest proof and pay through PayPal only if it holds.",
+    "facts": [
+      {
+        "value": "26",
+        "label": "bots on the public record in the demo"
+      },
+      {
+        "value": "68",
+        "label": "trades settled by the vault"
+      },
+      {
+        "value": "0",
+        "label": "cheat attempts accepted"
+      }
+    ],
+    "stack": "Solidity · Python · TypeScript · ENS · World ID",
+    "links": [
+      {
+        "label": "ETHGlobal showcase",
+        "url": "https://ethglobal.com/showcase/parable-gguy7"
+      },
+      {
+        "label": "v1",
+        "url": "https://github.com/Lagmator22/parable"
+      },
+      {
+        "label": "v2",
+        "url": "https://github.com/Lagmator22/parable-trade"
+      },
+      {
+        "label": "Live demo",
+        "url": "https://parable-demo.centralindia.cloudapp.azure.com"
+      }
+    ]
+  },
+  {
+    "id": "sutra",
+    "name": "SUTRA",
+    "sprite": "sutra",
+    "tagline": "An air-gapped AI workbench for refinery documents.",
+    "description": "Open-weight models on a local GPU read inspection scans and drawings, check the math deterministically, and export Word, Excel and PowerPoint files. A socket-level firewall shows that nothing goes out. Built for Smart India Hackathon 2026.",
+    "facts": [],
+    "stack": "Python · llama.cpp · LangGraph · SQLite-Vec",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lagmator22/SUTRA"
+      }
+    ]
+  },
+  {
+    "id": "quantime",
+    "name": "QuanTime",
+    "minor": true,
+    "tagline": "A benchmarking platform for trading matching engines.",
+    "description": "Containerizes an uploaded engine, loads it with a distributed bot fleet and ranks teams live on latency, throughput and correctness. Certificate of Achievement, IICPC Summer Hackathon 2026.",
+    "stack": "Go · C++ · Docker · TimescaleDB · NATS",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lagmator22/quantime"
+      }
+    ]
+  },
+  {
+    "id": "memogent",
+    "name": "Memogent",
+    "minor": true,
+    "tagline": "A memory orchestrator for on-device agents.",
+    "description": "A C++23 core with iOS, Android and Python bindings that decides which app, model or KV-cache page stays in RAM. In progress.",
+    "stack": "C++23 · Swift · Kotlin · Python",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lagmator22/memogent"
+      }
+    ]
+  },
+  {
+    "id": "qr-identity",
+    "name": "QR Identity",
+    "minor": true,
+    "tagline": "A React Native widget for Nothing Phone 3.",
+    "description": "Top 50 global finalist, Nothing Essential App Hackathon 2026.",
+    "stack": "React Native",
+    "links": []
+  }
+]

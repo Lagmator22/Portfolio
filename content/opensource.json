@@ -1,0 +1,51 @@
+[
+  {
+    "repo": "openvino",
+    "number": 33572,
+    "title": "f64 support for the Interpolate operator",
+    "note": "Unblocks ONNX Resize models with double-precision tensors. Touched core type validation, the ONNX frontend, Template plugin evaluation for opset v4 and v11, and type propagation tests.",
+    "url": "https://github.com/openvinotoolkit/openvino/pull/33572"
+  },
+  {
+    "repo": "openvino",
+    "number": 34485,
+    "title": "aten::bincount for the PyTorch frontend",
+    "note": "Written as a shared translate_bincount_common utility that other frontends can reuse. 48 of 48 parameterized layer tests pass on CPU and GPU.",
+    "url": "https://github.com/openvinotoolkit/openvino/pull/34485"
+  },
+  {
+    "repo": "openvino",
+    "number": 33633,
+    "title": "NaN handling semantics in the TopK specification",
+    "note": "",
+    "url": "https://github.com/openvinotoolkit/openvino/pull/33633"
+  },
+  {
+    "repo": "openvino",
+    "number": 34841,
+    "title": "Cleanup across core components",
+    "note": "",
+    "url": "https://github.com/openvinotoolkit/openvino/pull/34841"
+  },
+  {
+    "repo": "openvino",
+    "number": 35413,
+    "title": "CI workflow fix for cache cleanup",
+    "note": "",
+    "url": "https://github.com/openvinotoolkit/openvino/pull/35413"
+  },
+  {
+    "repo": "ghostfolio",
+    "number": 5725,
+    "title": "PortfolioSummary interface refactor",
+    "note": "Ghostfolio, 9.7k stars. TypeScript, Angular, NestJS.",
+    "url": "https://github.com/ghostfolio/ghostfolio/pull/5725"
+  },
+  {
+    "repo": "plano",
+    "number": 987,
+    "title": "Documentation fix",
+    "note": "Plano, 7.1k stars.",
+    "url": "https://github.com/katanemo/plano/pull/987"
+  }
+]

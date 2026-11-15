@@ -1,0 +1,24 @@
+{
+  "name": "Gurman Singh",
+  "role": "Systems programmer working on local AI inference",
+  "location": "Delhi, India",
+  "url": "https://gurman.is-a.dev",
+  "description": "Gurman Singh is a systems programmer working on local AI inference. Google Summer of Code 2026 contributor at Intel OpenVINO, author of OVAT, and an OpenVINO contributor.",
+  "status": "Open to internships",
+  "emailParts": ["gsingh16", "_be24", "@", "thapar", ".edu"],
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/Lagmator22" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/ouroboros22/" },
+    { "label": "X", "url": "https://x.com/ArenaOfGods_" }
+  ],
+  "education": {
+    "school": "Thapar Institute of Engineering and Technology, Patiala",
+    "degree": "B.E. Computer Engineering",
+    "when": "Aug 2024 to Jun 2028"
+  },
+  "skills": [
+    { "label": "Languages", "value": "C++ (primary), Python, SQL, TypeScript" },
+    { "label": "AI systems", "value": "OpenVINO, OpenVINO Model Server, OpenVINO GenAI, LangChain, LlamaIndex, OpenAI Agents SDK, MCP, Agent2Agent, RAG, CPU/GPU/NPU inference" },
+    { "label": "Tools", "value": "CMake, pytest, CI/CD, Git, whisper.cpp, USearch, SQLite (FTS5, sqlite-vec), Presidio, pydantic, ImGui/SDL2, React Native" }
+  ]
+}

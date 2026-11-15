@@ -1,0 +1,74 @@
+[
+  {
+    "when": "Nov 2026",
+    "kind": "hackathon",
+    "title": "Hacker at ETHGlobal Mumbai",
+    "detail": "Built Parable v1 solo at the in-person hackathon: a vault contract that keeps a public record of AI trading bots, including the ones that failed.",
+    "url": "https://ethglobal.com/showcase/parable-gguy7"
+  },
+  {
+    "when": "May to Sep 2026",
+    "kind": "experience",
+    "title": "Google Summer of Code contributor, Intel OpenVINO",
+    "detail": "Built and shipped OVAT, the OpenVINO Agentic Toolkit for AI PC. Large project, 12 weeks. Mentors: Freddy Chiu, Director of AI Software, Intel, and Ravi Panchumarthy, Ph.D., Intel.",
+    "url": "https://github.com/Lagmator22/ovat"
+  },
+  {
+    "when": "2026",
+    "kind": "honor",
+    "title": "Top 50 global finalist, Nothing Essential App Hackathon",
+    "detail": "For QR Identity, a React Native widget for Nothing Phone 3."
+  },
+  {
+    "when": "2026",
+    "kind": "hackathon",
+    "title": "Samsung PRISM GenAI Hackathon",
+    "detail": "Team of four. Added a git-revision-aware code search CLI to OvaSearch and raised NDCG@10 on CoIR AppsRetrieval from 0.056 to 0.514, about 9x, on CPU only.",
+    "url": "https://github.com/Lagmator22/OvaSearch"
+  },
+  {
+    "when": "2026",
+    "kind": "hackathon",
+    "title": "OpenAI Build Week",
+    "detail": "Built VaultAgent, a privacy-first local RAG app with a two-stage PII gate.",
+    "url": "https://github.com/Lagmator22/vaultagent"
+  },
+  {
+    "when": "2026",
+    "kind": "honor",
+    "title": "Certificate of Achievement, IICPC Summer Hackathon",
+    "detail": "For QuanTime, a benchmarking platform for trading matching engines.",
+    "url": "https://github.com/Lagmator22/quantime"
+  },
+  {
+    "when": "Jan 2026 to now",
+    "kind": "open-source",
+    "title": "Contributor, Intel OpenVINO",
+    "detail": "Five merged pull requests across the C++ core and the ONNX and PyTorch frontends.",
+    "url": "https://github.com/openvinotoolkit/openvino/pulls?q=is%3Apr+author%3ALagmator22"
+  },
+  {
+    "when": "Oct 2025 to now",
+    "kind": "open-source",
+    "title": "Open source developer",
+    "detail": "Contributing to projects in generative AI, AI inference and compilers, including OpenVINO, Ghostfolio and Plano."
+  },
+  {
+    "when": "Oct to Nov 2025",
+    "kind": "open-source",
+    "title": "Hacktoberfest 2025",
+    "detail": "Eight merged pull requests across open source AI and systems projects."
+  },
+  {
+    "when": "Aug to Nov 2025",
+    "kind": "experience",
+    "title": "Business Fellow, Perplexity",
+    "detail": "Official Perplexity AI campus partner. Part of a competitive go-to-market program to drive AI adoption on campus. Part-time, remote."
+  },
+  {
+    "when": "Aug 2024",
+    "kind": "education",
+    "title": "B.E. Computer Engineering, Thapar Institute",
+    "detail": "Thapar Institute of Engineering and Technology, Patiala. Class of 2028."
+  }
+]

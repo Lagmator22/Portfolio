@@ -1,0 +1,48 @@
+<!--
+  The Journey page. The timeline comes from content/journey.json, the pull
+  requests from content/opensource.json, the skills from content/site.json.
+-->
+<section class="page-head wrap">
+  <h1 data-words>Journey</h1>
+  <p data-reveal data-delay="250">Experience, open source, hackathons and honors, newest first.</p>
+</section>
+
+<section class="section wrap" id="timeline">
+  <div class="section__head" data-reveal>
+    <h2>Timeline</h2>
+    <p>Filter by kind.</p>
+    <div class="filters" role="group" aria-label="Filter the timeline">
+      {{journey_filters}}
+    </div>
+  </div>
+  <ol class="journey" data-journey>
+    {{journey}}
+  </ol>
+</section>
+
+<section class="section wrap" id="open-source">
+  <div class="section__head" data-reveal>
+    <h2>Open source</h2>
+    <p>Merged upstream.</p>
+  </div>
+  <div>
+    <h3 class="subhead subhead--first" data-reveal>Intel OpenVINO · 11k stars · since January 2026</h3>
+    <div class="rows" data-reveal>
+      {{oss_openvino}}
+    </div>
+    <a class="link more" href="https://github.com/openvinotoolkit/openvino/pulls?q=is%3Apr+author%3ALagmator22" target="_blank" rel="noopener noreferrer">All my OpenVINO pull requests {{arrow}}</a>
+    <h3 class="subhead" data-reveal>Elsewhere</h3>
+    <div class="rows" data-reveal>
+      {{oss_other}}
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" id="skills">
+  <div class="section__head" data-reveal>
+    <h2>Education and skills</h2>
+  </div>
+  <dl class="specs specs--flush" data-reveal>
+    {{specs}}
+  </dl>
+</section>
