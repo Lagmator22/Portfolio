@@ -129,12 +129,14 @@ b, strong { font-weight: 600; }
 }
 .walker {
   position: absolute; bottom: 1px; left: 0; --px: 1px; pointer-events: none;
-  opacity: 0; transition: opacity 0.3s;
+  opacity: 0; transition: opacity 0.3s, transform 0.18s linear;
   transform: translateX(calc(var(--p, 0) * (var(--track-w, 0px) - 16 * var(--px))));
-  animation: none;
 }
 .site-head.is-scrolled .walker { opacity: 1; }
-.walker.is-walking { animation: step 0.24s steps(1) infinite; }
+/* The walker's position lives in transform, so its bob must not touch
+   transform (the shared .sprite bob does): it steps on margin instead. */
+.sprite.walker { animation: step 1.3s steps(1) infinite; }
+.sprite.walker.is-walking { animation-duration: 0.24s; }
 @keyframes step { 0%, 49.9% { margin-bottom: 0; } 50%, 100% { margin-bottom: var(--px); } }
 @media (min-resolution: 2dppx) { .walker { --px: 1.5px; } }
 
