@@ -6,3 +6,6 @@ private-notes/
 .DS_Store
 _site/
 .playwright-mcp/
+
+# JetBrains IDE settings (local to each machine)
+.idea/
